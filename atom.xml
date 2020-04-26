@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-19T14:32:58.680Z</updated>
+  <updated>2020-04-26T14:53:31.977Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中文标题</title>
+    <link href="http://yoursite.com/2020/04/26/chinese/"/>
+    <id>http://yoursite.com/2020/04/26/chinese/</id>
+    <published>2020-04-26T14:53:31.000Z</published>
+    <updated>2020-04-26T14:53:31.977Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>OCLint静态代码校验初探</title>
