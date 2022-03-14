@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Lazyloading，iOS，老王，Lazyloading.me">
+    <meta name="description" content="iOS开发者Lazyloading个人站，随心发挥，自由写作。">
+    <meta name="author" content="Lazyloading">
+    
+    <title>
+        
+            SDWebImage链接重定向问题处理 |
+        
+        Lazyloading
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"lazyloading.me","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#003366","avatar":"/images/favicon.jpg","favicon":"/images/favicon.jpg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"我与我周旋久，宁做我......"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Lazyloading的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/favicon.jpg">
+                </a>
+            
+            <a class="logo-title" href="/">
+                Lazyloading
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">SDWebImage链接重定向问题处理</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/favicon.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Lazyloading</span>
+                        
+                            <span class="author-label">Lv2</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-03-14 20:01:58</span>
+        <span class="mobile">2022-03-14 20:01</span>
+    </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 分钟</span>
+        </span>
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h4 id="Round-1">Round 1</h4>
+<p>最近公司的文件服务器进行了改造，即使是图片的加载请求也要携带<code>token</code>，否则无法加载，而我们项目中图片加载用的是<code>SDWebImage</code>,当时听到这个需求我内心毫无波动，心里已经…你懂得，不过该做还是要做，三下五除二写完了代码如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[SDWebImageDownloader sharedDownloader] setValue:<span class="string">@&quot;你的token&quot;</span> forHTTPHeaderField:<span class="string">@&quot;Authorization&quot;</span>];</span><br></pre></td></tr></table></figure>
+<p><code>SDWebImage</code>的下载处理是由<code>SDWebImageDownloader</code>单例类实现，所以在你项目中合适的地方加上这句代码，项目中所有用<code>SDWebImage</code>做图片加载的地方就都会携带上<code>token</code>了</p>
+<h4 id="Round-2">Round 2</h4>
+<p>这样修改完后确实本来不能加载的地方变得正常了，直到那一天，那是一个春天…<br>
+项目中要添加一个需求，需要引用公司的一个私有<code>Pod</code>功能库，又是一顿操作，集成完毕，逻辑编写完成，run，诶，图片居然没加载出来，我草这什么情况，我再次确认了一下，我的<code>token</code>设置完成了的</p>
+<p>我去询问编写这个<code>Pod</code>的同事，是不是我哪里没配置完成，他略微沉思一下两秒钟后说，你添加完<code>token</code>还要在<code>SDWebImageDownloader</code>修改下源码，我：？？？，随后他找到了这个源码，代码如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session task:(<span class="built_in">NSURLSessionTask</span> *)task willPerformHTTPRedirection:(<span class="built_in">NSHTTPURLResponse</span> *)response newRequest:(<span class="built_in">NSURLRequest</span> *)request completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSURLRequest</span> * _Nullable))completionHandler &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Identify the operation that runs this task and pass it the delegate method</span></span><br><span class="line">    <span class="built_in">NSOperation</span>&lt;SDWebImageDownloaderOperation&gt; *dataOperation = [<span class="keyword">self</span> operationWithTask:task];</span><br><span class="line">    <span class="keyword">if</span> ([dataOperation respondsToSelector:<span class="keyword">@selector</span>(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:)]) &#123;</span><br><span class="line">        [dataOperation URLSession:session task:task willPerformHTTPRedirection:response newRequest:request completionHandler:completionHandler];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (completionHandler) &#123;</span><br><span class="line">            completionHandler(request);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>他解释说道，这个功能模块里的一些图片链接中携带了一些参数，并不是直接指向资源，所以请求会进行重定向，所以需要在这里进行处理，处理后的代码如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session task:(<span class="built_in">NSURLSessionTask</span> *)task willPerformHTTPRedirection:(<span class="built_in">NSHTTPURLResponse</span> *)response newRequest:(<span class="built_in">NSURLRequest</span> *)request completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSURLRequest</span> * _Nullable))completionHandler &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Identify the operation that runs this task and pass it the delegate method</span></span><br><span class="line">    <span class="built_in">NSOperation</span>&lt;SDWebImageDownloaderOperation&gt; *dataOperation = [<span class="keyword">self</span> operationWithTask:task];</span><br><span class="line">    <span class="built_in">NSMutableURLRequest</span> *customRequest = [[<span class="built_in">NSMutableURLRequest</span> alloc] initWithURL:request.URL];</span><br><span class="line">    customRequest.allHTTPHeaderFields = <span class="keyword">self</span>.HTTPHeaders;</span><br><span class="line">    <span class="keyword">if</span> ([dataOperation respondsToSelector:<span class="keyword">@selector</span>(URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:)]) &#123;</span><br><span class="line">        [dataOperation URLSession:session task:task willPerformHTTPRedirection:response newRequest:customRequest completionHandler:completionHandler];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (completionHandler) &#123;</span><br><span class="line">            completionHandler(customRequest);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我将代码修改后，run，确实，问题解决了，但是不对啊，我们的<code>SDWebImage</code>是通过<code>Pod</code>的方式集成的，这样直接在<code>Pod</code>文件夹下修改三方的源码，那么下次更新后，岂不是被覆盖了？这是一个新的问题，于是我开始思考怎么解决重定向问题的同事不修改三方库的源码，脑海中瞬间就想到了<code>AOP</code></p>
+<p>iOS开发中优秀的<code>AOP</code>库那必须有<code>Aspects</code>名字，接下来我开始思考具体步骤<br>
+首先，通过同事提供的解决问题的代码来看，他是把参数<code>request</code>给改为了一个自定义的<code>customRequest</code>，这两个的区别，然后重新设置了<code>allHTTPHeaderFields</code></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSMutableURLRequest</span> *customRequest = [[<span class="built_in">NSMutableURLRequest</span> alloc] initWithURL:request.URL];</span><br><span class="line">customRequest.allHTTPHeaderFields = <span class="keyword">self</span>.HTTPHeaders;</span><br></pre></td></tr></table></figure>
+<p>那么我想，问题主要就是在<code>allHTTPHeaderFields</code>这里了，我打印了<code>request</code>和<code>customRequest</code>的<code>allHTTPHeaderFields</code>后发现，前者比后者少了<code>token</code>,怪不得无法加载，这里要提一下下边这个方法</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)URLSession:(<span class="built_in">NSURLSession</span> *)session task:(<span class="built_in">NSURLSessionTask</span> *)task willPerformHTTPRedirection:(<span class="built_in">NSHTTPURLResponse</span> *)response newRequest:(<span class="built_in">NSURLRequest</span> *)request completionHandler:(<span class="keyword">void</span> (^)(<span class="built_in">NSURLRequest</span> * _Nullable))completionHandler </span><br></pre></td></tr></table></figure>
+<p>这其实不是<code>SDWebImageDownloader</code>的方法，是<code>NSURLSessionTaskDelegate</code>的里的协议方法，<code>SDWebImageDownloader</code>实现协议方法后在里边做了自己的重定向处理</p>
+<p>那么说一下我一开始的想法，既然问题出在重定向时<code>request</code>里未携带我们手动添加的<code>token</code>，并且重定向这里肯定是要做处理的，那我们直接把相关参数设置给<code>request</code>，没必要创建一个新的<code>customRequest</code>实例</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[request setValue:<span class="keyword">self</span>.HTTPHeaders forKey:<span class="string">@&quot;allHTTPHeaderFields&quot;</span>];</span><br></pre></td></tr></table></figure>
+<p>因为<code>request</code>是一个<code>NSURLRequest</code>对象，它的<code>allHTTPHeaderFields</code>是一个<code>readonly</code>属性，我们不能直接修改，所以我想当然的用<code>KVC</code>去操作，<br>
+然后 run ，然后 我草crash了，报错信息如下</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;[&lt;NSURLRequest 0x2800efa50&gt; setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key allHTTPHeaderFields.&quot;</span></span><br></pre></td></tr></table></figure>
+<p>看描述信息是说<code>NSURLRequest</code>没有对应的<code>allHTTPHeaderFields</code>这个key，有那么一瞬间我愣了下，这不科学啊怎么可能没有，我点进<code>NSURLRequest</code>类确认了下，有啊，什么情况，但是本着求知的态度，我心想是不是<code>NSURLRequest</code>内部使用的是不是不叫<code>allHTTPHeaderFields</code>,但是不对啊，这个属性明明在的啊，即使是别的也应该是内部重新赋值我这里不应该报错啊，不过我还是用通过<code>runtime</code>将他的属性列表打印了一下，再次确认了，他确实有<code>allHTTPHeaderFields</code>这个属性，于是我搜索了下相关问题，发现了一个关键词</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="built_in">BOOL</span>)accessInstanceVariablesDirectly</span><br></pre></td></tr></table></figure>
+<p>详细信息自行检索，我这里说下结果，这个是针对<code>KVC</code>的，总的来说，当一个类实现了这个方法并且返回了<code>YES</code>他就可以通过<code>KVC</code>(这个说法不完全准确，因为本文不是针对KVC的故简要说明)赋值，如果返回<code>NO</code>就不可以用<code>KVC</code>赋值</p>
+<p>看到这里后我猜测<code>NSURLRequest</code>里这个方法应该是返回了<code>NO</code>,那完了，走不通了，还是要实例化一个新的对象</p>
+<h4 id="Round-3">Round 3</h4>
+<p>搞了半天想省事看来不行啊，那拉倒，直接开始<code>AOP</code>修改：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSError</span> * error ;</span><br><span class="line">[[SDWebImageDownloader sharedDownloader] aspect_hookSelector:<span class="keyword">@selector</span>(URLSession: task: willPerformHTTPRedirection: newRequest: completionHandler:) withOptions:AspectPositionInstead usingBlock:^(<span class="keyword">id</span>&lt;AspectInfo&gt; aspectInfo, <span class="built_in">NSString</span> *num)&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSArray</span> * param = aspectInfo.arguments;</span><br><span class="line">    <span class="built_in">NSURLRequest</span> * request = param[<span class="number">3</span>];</span><br><span class="line">    <span class="built_in">NSURLSessionTask</span> * task = param[<span class="number">1</span>];</span><br><span class="line">    <span class="built_in">NSMutableURLRequest</span> *customRequest = [[<span class="built_in">NSMutableURLRequest</span> alloc] initWithURL:request.URL];</span><br><span class="line">    customRequest.allHTTPHeaderFields = task.currentRequest.allHTTPHeaderFields;</span><br><span class="line">    request = customRequest;</span><br><span class="line">    <span class="built_in">NSInvocation</span> * invocation = aspectInfo.originalInvocation;</span><br><span class="line">    [invocation setArgument:&amp;request atIndex:<span class="number">5</span>];</span><br><span class="line">    [invocation invoke];</span><br><span class="line">    </span><br><span class="line">&#125; error:&amp;error];</span><br></pre></td></tr></table></figure>
+<p>这里边<code>aspectInfo</code>就是被hook方法的信息，可以通过它取到原方法的参数，调用对象等等，我们这里要添加我们的token，因此取出参数进行修改</p>
+<ul>
+<li>arguments是原方法的入参列表，是一个数组</li>
+<li>invocation是一个消息对象，包含了一个方法的所有信息<br>
+通过<code>URLSession: task: willPerformHTTPRedirection: newRequest: completionHandler:</code>方法我们可以知道<code>request</code>的索引是3，<code>task</code>的索引是1（取出它是因为我们要获取原header信息，这个不能丢弃），之后对<code>request</code>重新进行赋值，完成修改，然后重新调用方法</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[invocation setArgument:&amp;request atIndex:<span class="number">5</span>];</span><br><span class="line">[invocation invoke];</span><br></pre></td></tr></table></figure>
+<p>因为我们只需要修改<code>request</code>一个对象，因此只重新设置这一个方法入参，至于这里为什么在赋值的时候索引是5,因为前两个分别被该方法的<code>self</code>与<code>_cmd</code>占用，所以我们设置参数的时候索引是从2开始</p>
+<p>再次run，嗯，图片顺利加载，问题解决。</p>
+<p>这样一来，我们就不需要修改三方的源码就解决了问题，否则修改源码的话每次更新<code>Pod</code>我们的修改就会被覆盖掉，如果哪次发版没注意，测试也没回归覆盖，很容易将问题带到线上</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：SDWebImage链接重定向问题处理</li>
+        <li>本文作者：Lazyloading</li>
+        <li>创建时间：2022-03-14 20:01:58</li>
+        <li>
+            本文链接：http://lazyloading.me/sdwebimageredirect/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/yearsummary/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">快进来找个地方坐下，一个移动端老菜鸟的2021年度总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2019</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Lazyloading</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Round-1"><span class="nav-number">1.</span> <span class="nav-text">Round 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Round-2"><span class="nav-number">2.</span> <span class="nav-text">Round 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Round-3"><span class="nav-number">3.</span> <span class="nav-text">Round 3</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
