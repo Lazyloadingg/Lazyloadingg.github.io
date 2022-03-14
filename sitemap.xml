@@ -86,14 +86,14 @@
   </url>
   
   <url>
-    <loc>http://lazyloading.me/repository/index.html</loc>
+    <loc>http://lazyloading.me/categories/index.html</loc>
     
     <lastmod>2020-04-26</lastmod>
     
   </url>
   
   <url>
-    <loc>http://lazyloading.me/categories/index.html</loc>
+    <loc>http://lazyloading.me/repository/index.html</loc>
     
     <lastmod>2020-04-26</lastmod>
     
@@ -123,14 +123,14 @@
   </url>
   
   <url>
-    <loc>http://lazyloading.me/tags/Cocoapods/</loc>
+    <loc>http://lazyloading.me/tags/OCLint/</loc>
     <lastmod>2022-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://lazyloading.me/tags/OCLint/</loc>
+    <loc>http://lazyloading.me/tags/Cocoapods/</loc>
     <lastmod>2022-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
