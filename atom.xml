@@ -6,7 +6,7 @@
   <link href="http://lazyloading.me/atom.xml" rel="self"/>
   
   <link href="http://lazyloading.me/"/>
-  <updated>2022-03-24T09:25:16.991Z</updated>
+  <updated>2022-05-12T03:45:47.506Z</updated>
   <id>http://lazyloading.me/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>load和initialize区别</title>
+    <link href="http://lazyloading.me/load-initialize/"/>
+    <id>http://lazyloading.me/load-initialize/</id>
+    <published>2022-04-29T01:47:41.000Z</published>
+    <updated>2022-05-12T03:45:47.506Z</updated>
+    
+    <content type="html"><![CDATA[<p>[toc]</p><p>最近在群里突然有群友问load和initialize区别，我心想这不简单吗，脑海中瞬间冒出两条，然后就想不起来了，然后看到群友七嘴八舌一人一个说法，我就寻思重新回顾下这个知识点，遂做个回顾。</p><p>这篇文章是我结合网上资料，官方文档，和runtime源码整理得出的，在说明结论时我会在结论前附带官方文档解释并会在（）附带自己的理解，如果理解有误还请指正；你也可以写个demo去验证，我顺手在项目中验证了下所以就不贴代码了。</p><h3 id="调用方式">调用方式</h3><blockquote><ul><li>OBJC_EXPORT void _objc_load_image(HMODULE image, header_info *hinfo)<br>{<br>prepare_load_methods(hinfo);<br>call_load_methods();<br>}<br>可以下载源码(objc4-818.2源码)点<code>objc-os</code>文件进去查看<code>_objc_load_image -&gt; call_load_methods -&gt; call_load_methods -&gt; call_class_loads -&gt; (*load_method(cls,@selector(load));</code></li></ul></blockquote><ul><li>load通过函数地址调用</li><li>initialize通过objc_msgSend（runtime消息发送）调用</li></ul><h3 id="调用时机">调用时机</h3><blockquote><ul><li>Invoked whenever a class or category is added to the Objective-C runtime; implement this method to perform class-specific behavior upon loading.</li></ul></blockquote><ul><li>load是runtime加载类、分类的时候调用(只会调用一次)</li></ul><blockquote><ul><li>Initializes the class before it receives its first message.</li><li>The superclass implementation may be called multiple times if subclasses do not implement initialize—the runtime will call the inherited implementation—or if subclasses explicitly call [super initialize].</li></ul></blockquote><ul><li>initialize是类第一次接收到消息的时候调用（可以在main前也可以在后，看什么时候第一次接收消息）, 每一个类只会initialize一次(如果子类没有实现initialize方法, 会调用父类的initialize方法, 所以父类的initialize方法可能会调用多次)</li></ul><p><strong>以上的调用一次指的是程序生命周期内默认只调用一次，但是如果你手动调用的话还是会调用多次</strong></p><h3 id="调用顺序">调用顺序</h3><blockquote><ul><li>A class’s +load method is called after all of its superclasses’ +load methods.</li><li>A category +load method is called after the class’s own +load method.</li></ul></blockquote><ul><li>load<ol><li>先调用类的load, 再调用分类的load</li><li>先调用父类的load，再调用子类的load</li><li>先编译的类（分类），先调用</li></ol></li></ul><blockquote><ul><li>The runtime sends initialize to each class in a program just before the class, or any class that inherits from it, is sent its first message from within the program. Superclasses receive this message before their subclasses.</li><li>The superclass implementation may be called multiple times if subclasses do not implement initialize—the runtime will call the inherited implementation—or if subclasses explicitly call [super initialize].</li></ul></blockquote><ul><li>initialize<ol><li>先调用父类，再调用子类（即使你先给子类发消息，子类默认也会先调用父类）</li><li>如果子类没实现initialize，会向上调用父类</li><li>如果分类实现initialize，则会覆盖本类的initialize（因为是objc_msgSend消息发送调用，分类方法加载时会插入在本类前）</li></ol></li></ul><h3 id="资料">资料</h3><ul><li>如果你不清楚怎么查看官方文档:<br><code>  Xcode -&gt; Help -&gt; Developer Documentation</code><br>或者你也可以下载<code>Dash</code>查阅</li><li>如果你想查看源码：<br><a class="link"   href="https://opensource.apple.com/tarballs/objc4/" >runtime源码下载<i class="fas fa-external-link-alt"></i></a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[toc]&lt;/p&gt;
+&lt;p&gt;最近在群里突然有群友问load和initialize区别，我心想这不简单吗，脑海中瞬间冒出两条，然后就想不起来了，然后看到群友七嘴八舌一人一个说法，我就寻思重新回顾下这个知识点，遂做个回顾。&lt;/p&gt;
+&lt;p&gt;这篇文章是我结合网上资料，官方文档，和ru</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>《人类简史：从动物到上帝》随性笔记</title>
