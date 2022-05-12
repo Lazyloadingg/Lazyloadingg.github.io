@@ -6,7 +6,7 @@
 title: Lazyloading的博客
 subtitle: '我与我周旋久，宁做我。'
 description: 'iOS开发者Lazyloading个人站，随心发挥，自由写作。'
-keywords: Lazyloading，iOS，老王，Lazyloading.me
+keywords: Lazyloading，iOS，老王，Lazy.wiki
 author: Lazyloading
 language: zh-CN
 timezone: ''
@@ -37,7 +37,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://lazyloading.me
+url: https://lazy.wiki
 root: /
 #permalink: :year/:month/:day/:title/
 permalink: :title/

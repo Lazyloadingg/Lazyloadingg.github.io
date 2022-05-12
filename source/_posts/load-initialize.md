@@ -3,7 +3,7 @@ title: load和initialize区别
 date: 2022-04-29 09:47:41
 tags:
 ---
-[toc]
+[TOC]
 
 最近在群里突然有群友问load和initialize区别，我心想这不简单吗，脑海中瞬间冒出两条，然后就想不起来了，然后看到群友七嘴八舌一人一个说法，我就寻思重新回顾下这个知识点，遂做个回顾。
 
@@ -17,6 +17,7 @@ tags:
 可以下载源码(objc4-818.2源码)点`objc-os`文件进去查看`_objc_load_image -> call_load_methods -> call_load_methods -> call_class_loads -> (*load_method(cls,@selector(load));`
 
 - load通过函数地址调用
+> - The runtime sends initialize to each class in a program just before the class, or any class that inherits from it, is sent its first message from within the program. Superclasses receive this message before their subclasses.
 - initialize通过objc_msgSend（runtime消息发送）调用
 
 ### 调用时机
