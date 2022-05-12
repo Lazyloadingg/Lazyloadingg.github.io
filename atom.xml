@@ -3,11 +3,11 @@
   <title>Lazyloading的博客</title>
   
   <subtitle>我与我周旋久，宁做我。</subtitle>
-  <link href="http://lazyloading.me/atom.xml" rel="self"/>
+  <link href="https://lazy.wiki/atom.xml" rel="self"/>
   
-  <link href="http://lazyloading.me/"/>
+  <link href="https://lazy.wiki/"/>
   <updated>2022-05-12T05:30:29.815Z</updated>
-  <id>http://lazyloading.me/</id>
+  <id>https://lazy.wiki/</id>
   
   <author>
     <name>Lazyloading</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>load和initialize区别</title>
-    <link href="http://lazyloading.me/load-initialize/"/>
-    <id>http://lazyloading.me/load-initialize/</id>
+    <link href="https://lazy.wiki/load-initialize/"/>
+    <id>https://lazy.wiki/load-initialize/</id>
     <published>2022-04-29T01:47:41.000Z</published>
     <updated>2022-05-12T05:30:29.815Z</updated>
     
@@ -40,8 +40,8 @@
   
   <entry>
     <title>《人类简史：从动物到上帝》随性笔记</title>
-    <link href="http://lazyloading.me/humanhistory/"/>
-    <id>http://lazyloading.me/humanhistory/</id>
+    <link href="https://lazy.wiki/humanhistory/"/>
+    <id>https://lazy.wiki/humanhistory/</id>
     <published>2022-03-24T09:22:48.000Z</published>
     <updated>2022-03-24T09:25:16.991Z</updated>
     
@@ -62,8 +62,8 @@
   
   <entry>
     <title>SDWebImage链接重定向问题处理</title>
-    <link href="http://lazyloading.me/sdwebimageredirect/"/>
-    <id>http://lazyloading.me/sdwebimageredirect/</id>
+    <link href="https://lazy.wiki/sdwebimageredirect/"/>
+    <id>https://lazy.wiki/sdwebimageredirect/</id>
     <published>2022-03-14T12:01:58.000Z</published>
     <updated>2022-03-14T12:28:54.377Z</updated>
     
@@ -83,8 +83,8 @@
   
   <entry>
     <title>快进来找个地方坐下，一个移动端老菜鸟的2021年度总结</title>
-    <link href="http://lazyloading.me/yearsummary/"/>
-    <id>http://lazyloading.me/yearsummary/</id>
+    <link href="https://lazy.wiki/yearsummary/"/>
+    <id>https://lazy.wiki/yearsummary/</id>
     <published>2021-12-19T08:12:09.000Z</published>
     <updated>2021-12-19T08:13:15.305Z</updated>
     
@@ -99,14 +99,14 @@
     
     
     
-    <category term="年终总结" scheme="http://lazyloading.me/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    <category term="年终总结" scheme="https://lazy.wiki/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
   <entry>
     <title>iOS模拟器推送测试及踩坑</title>
-    <link href="http://lazyloading.me/iospushsimulator/"/>
-    <id>http://lazyloading.me/iospushsimulator/</id>
+    <link href="https://lazy.wiki/iospushsimulator/"/>
+    <id>https://lazy.wiki/iospushsimulator/</id>
     <published>2021-12-19T07:43:04.000Z</published>
     <updated>2021-12-22T13:07:56.284Z</updated>
     
@@ -122,14 +122,14 @@
     
     
     
-    <category term="iOS" scheme="http://lazyloading.me/tags/iOS/"/>
+    <category term="iOS" scheme="https://lazy.wiki/tags/iOS/"/>
     
   </entry>
   
   <entry>
     <title>Homebrew 安装Mysql密码忘记解决</title>
-    <link href="http://lazyloading.me/mysqlerror/"/>
-    <id>http://lazyloading.me/mysqlerror/</id>
+    <link href="https://lazy.wiki/mysqlerror/"/>
+    <id>https://lazy.wiki/mysqlerror/</id>
     <published>2021-12-19T07:40:17.000Z</published>
     <updated>2021-12-19T08:13:41.542Z</updated>
     
@@ -145,14 +145,14 @@
     
     
     
-    <category term="Mysql" scheme="http://lazyloading.me/tags/Mysql/"/>
+    <category term="Mysql" scheme="https://lazy.wiki/tags/Mysql/"/>
     
   </entry>
   
   <entry>
     <title>iOS15推送后台语音播报探索</title>
-    <link href="http://lazyloading.me/iosnotice/"/>
-    <id>http://lazyloading.me/iosnotice/</id>
+    <link href="https://lazy.wiki/iosnotice/"/>
+    <id>https://lazy.wiki/iosnotice/</id>
     <published>2021-12-19T06:38:57.000Z</published>
     <updated>2021-12-19T08:13:46.538Z</updated>
     
@@ -169,14 +169,14 @@
     
     
     
-    <category term="iOS" scheme="http://lazyloading.me/tags/iOS/"/>
+    <category term="iOS" scheme="https://lazy.wiki/tags/iOS/"/>
     
   </entry>
   
   <entry>
     <title>初识Flutter总结</title>
-    <link href="http://lazyloading.me/flutterstuday/"/>
-    <id>http://lazyloading.me/flutterstuday/</id>
+    <link href="https://lazy.wiki/flutterstuday/"/>
+    <id>https://lazy.wiki/flutterstuday/</id>
     <published>2021-07-22T14:33:55.000Z</published>
     <updated>2021-12-22T13:07:04.733Z</updated>
     
@@ -195,14 +195,14 @@
     
     
     
-    <category term="Flutter" scheme="http://lazyloading.me/tags/Flutter/"/>
+    <category term="Flutter" scheme="https://lazy.wiki/tags/Flutter/"/>
     
   </entry>
   
   <entry>
     <title>《中国合伙人》台词</title>
-    <link href="http://lazyloading.me/Chinese-partner/"/>
-    <id>http://lazyloading.me/Chinese-partner/</id>
+    <link href="https://lazy.wiki/Chinese-partner/"/>
+    <id>https://lazy.wiki/Chinese-partner/</id>
     <published>2020-05-02T14:56:07.000Z</published>
     <updated>2020-05-02T14:57:05.644Z</updated>
     
@@ -221,14 +221,14 @@
     
     
     
-    <category term="电影台词" scheme="http://lazyloading.me/tags/%E7%94%B5%E5%BD%B1%E5%8F%B0%E8%AF%8D/"/>
+    <category term="电影台词" scheme="https://lazy.wiki/tags/%E7%94%B5%E5%BD%B1%E5%8F%B0%E8%AF%8D/"/>
     
   </entry>
   
   <entry>
     <title>《你是我兄弟》台词摘录</title>
-    <link href="http://lazyloading.me/My-brother/"/>
-    <id>http://lazyloading.me/My-brother/</id>
+    <link href="https://lazy.wiki/My-brother/"/>
+    <id>https://lazy.wiki/My-brother/</id>
     <published>2020-04-30T10:35:41.000Z</published>
     <updated>2020-05-02T14:57:45.038Z</updated>
     
@@ -247,14 +247,14 @@
     
     
     
-    <category term="电影台词" scheme="http://lazyloading.me/tags/%E7%94%B5%E5%BD%B1%E5%8F%B0%E8%AF%8D/"/>
+    <category term="电影台词" scheme="https://lazy.wiki/tags/%E7%94%B5%E5%BD%B1%E5%8F%B0%E8%AF%8D/"/>
     
   </entry>
   
   <entry>
     <title>OCLint静态代码校验初探</title>
-    <link href="http://lazyloading.me/OCLint%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A0%A1%E9%AA%8C%E5%88%9D%E6%8E%A2/"/>
-    <id>http://lazyloading.me/OCLint%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A0%A1%E9%AA%8C%E5%88%9D%E6%8E%A2/</id>
+    <link href="https://lazy.wiki/OCLint%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A0%A1%E9%AA%8C%E5%88%9D%E6%8E%A2/"/>
+    <id>https://lazy.wiki/OCLint%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A0%A1%E9%AA%8C%E5%88%9D%E6%8E%A2/</id>
     <published>2020-03-19T13:04:41.000Z</published>
     <updated>2020-04-30T13:23:37.508Z</updated>
     
@@ -272,14 +272,14 @@
     
     
     
-    <category term="OCLint" scheme="http://lazyloading.me/tags/OCLint/"/>
+    <category term="OCLint" scheme="https://lazy.wiki/tags/OCLint/"/>
     
   </entry>
   
   <entry>
     <title>Pod库创建流程（下）</title>
-    <link href="http://lazyloading.me/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
-    <id>http://lazyloading.me/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89/</id>
+    <link href="https://lazy.wiki/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
+    <id>https://lazy.wiki/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8B%EF%BC%89/</id>
     <published>2019-07-28T07:41:41.000Z</published>
     <updated>2021-07-22T15:37:42.419Z</updated>
     
@@ -297,14 +297,14 @@
     
     
     
-    <category term="Cocoapods" scheme="http://lazyloading.me/tags/Cocoapods/"/>
+    <category term="Cocoapods" scheme="https://lazy.wiki/tags/Cocoapods/"/>
     
   </entry>
   
   <entry>
     <title>Pod库创建流程（上）</title>
-    <link href="http://lazyloading.me/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
-    <id>http://lazyloading.me/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/</id>
+    <link href="https://lazy.wiki/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
+    <id>https://lazy.wiki/Pod%E5%BA%93%E5%88%9B%E5%BB%BA%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%8A%EF%BC%89/</id>
     <published>2019-07-25T02:38:41.000Z</published>
     <updated>2021-07-22T15:39:07.062Z</updated>
     
@@ -323,7 +323,7 @@
     
     
     
-    <category term="Cocoapods" scheme="http://lazyloading.me/tags/Cocoapods/"/>
+    <category term="Cocoapods" scheme="https://lazy.wiki/tags/Cocoapods/"/>
     
   </entry>
   
