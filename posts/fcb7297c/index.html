@@ -9,7 +9,7 @@
     
     <title>
         
-            快进来找个地方坐下，一个移动端老菜鸟的2021年度总结 |
+            Pod库创建流程（下） |
         
         Lazyloading
     </title>
@@ -171,7 +171,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">快进来找个地方坐下，一个移动端老菜鸟的2021年度总结</span>
+            <span class="title-hover-animation">Pod库创建流程（下）</span>
         </div>
 
         
@@ -190,8 +190,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-19 16:12:09</span>
-        <span class="mobile">2021-12-19 16:12</span>
+        <span class="pc">2019-07-28 15:41:41</span>
+        <span class="mobile">2019-07-28 15:41</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -199,7 +199,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>&nbsp;
+                        <a href="/categories/%E5%BC%80%E5%8F%91/">开发</a>&nbsp;
                     </li>
                 
             </ul>
@@ -211,7 +211,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">年终总结</a>&nbsp;
+                        <a href="/tags/Cocoapods/">Cocoapods</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,12 +221,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>2.4k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>8 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
         </span>
     
     
@@ -238,79 +238,132 @@
         
 
         <div class="article-content markdown-body">
-            <p><strong>前言：</strong> 想一想，参加工作已经五年了，还从没有给自己写过年度总结（只写过公司要求的那种），最近在群里看到各位群友都在写年度总结，看了几篇后感觉挺有意思，字里行间的喜怒哀乐，让我感觉非常亲切，这就是生活的味道啊，所以，不自觉地就开始回想起自己这一年的经历，遂动手写下了了这篇自己人生中第一篇年度总结。</p>
-<h2 id="回首2021">回首2021</h2>
-<h3 id="工作">工作</h3>
-<p>进入目前公司是在去年国庆节前后，当时项目紧，并且公司对那个项目也非常重视，所以我们几个移动端一一起参与进去加了一段时间的班，到去年底今年初的时候，公司启动了一个新项目，可能是因为我之前做过物流相关的项目，而这个也是物流相关，所以领导决定让我去做，其实项目挺简单，所以从我接下来到现在，一年时间平平淡淡，项目稳步迭代，也没有什么大的技术难点，这让我中间有了一段时间的空闲期，中间抽身到别的项目去做过一段辅助性工作，再然后还是没需求进来，工作不饱和，我就开始思考起干脆去看点新东西吧。</p>
-<h3 id="学习">学习</h3>
-<h4 id="Flutter">Flutter</h4>
-<p>其实<code>flutter</code>这个跨平台框架发布已经有几年时间了，不过由于我没有认真去了解过，所以对于我来说是一个新的东西，以前看过几天，没有实际应用边学边忘，为了避免再次出现这样的情况于是我把公司的项目给仿写了下，</p>
-<p>当时找了好多在线教程教程和书籍包括<a class="link"   target="_blank" rel="noopener" href="https://book.flutterchina.club" >《Flutter实战》<i class="fas fa-external-link-alt"></i></a>以及在京东读书看的《Flutter入门与实战》</p>
-<p>一开始确实不太习惯，从命令式布局的UIKit到声明式布局的Flutter，当时在写的时候脑海中不自觉地问了很多次为什么，这里为什么要这么写，那里为什么要这么设计，因为当时我的思维逻辑还是iOS里UIKit的布局方式那一套，特别是写列表的时候，查了很多次Flutter的列表复用的问题，再比如…这嵌套也太tm恶心了吧🤮，为什么非要一层一层嵌套，我就写个层叠布局为什么非要套一层…之类的问题很多，但是写的久了之后，写的顺手了后，我只想说一句</p>
+            <meta name="referrer" content="no-referrer" />
+ [TOC]
+<h1>创建pod库流程(下)</h1>
+<p>前边讲了pod库默认工程模板的创建，文件添加存放路径，代码编写位置等基本信息，今天简单说下spec文件的编写及推送。</p>
+<h2 id="第一步">第一步</h2>
+<p>首先我们打开pod库的spec文件,以<code>DYTest</code>项目为例：<br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8A%E5%8D%8811.55.39.png"
+                      alt="屏幕快照 2019-07-28 上午11.55.39"
+                ><br>
+其中红色箭头所指的就是项目的spec文件，红色方框内就是pod默认的spec文件的内容，里边有很多字段分别对应不同的配置信息，但一般来说我们<strong>只需要</strong>配置其中的几项就可以，其他的可以暂时删掉。</p>
+<p>删完之后大概如下图：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Pod::Spec.new <span class="keyword">do</span> <span class="params">|s|</span></span><br><span class="line">  s.name             = <span class="string">&#x27;DYTest&#x27;</span></span><br><span class="line">  s.version          = <span class="string">&#x27;0.1.0&#x27;</span></span><br><span class="line">  s.summary          = <span class="string">&#x27;A short description of DYTest.&#x27;</span></span><br><span class="line">  s.description      = <span class="string">&lt;&lt;-DESC</span></span><br><span class="line"><span class="string">TODO: Add long description of the pod here.</span></span><br><span class="line"><span class="string">                       DESC</span></span><br><span class="line"></span><br><span class="line">  s.homepage         = <span class="string">&#x27;https://github.com/lazyloading@163.com/DYTest&#x27;</span></span><br><span class="line">  s.license          = &#123; <span class="symbol">:type</span> =&gt; <span class="string">&#x27;MIT&#x27;</span>, <span class="symbol">:file</span> =&gt; <span class="string">&#x27;LICENSE&#x27;</span> &#125;</span><br><span class="line">  s.author           = &#123; <span class="string">&#x27;lazyloading@163.com&#x27;</span> =&gt; <span class="string">&#x27;lazyloading@163.com&#x27;</span> &#125;</span><br><span class="line">  s.source           = &#123; <span class="symbol">:git</span> =&gt; <span class="string">&#x27;https://github.com/lazyloading@163.com/DYTest.git&#x27;</span>, <span class="symbol">:tag</span> =&gt; s.version.to_s &#125;</span><br><span class="line">  s.ios.deployment_target = <span class="string">&#x27;8.0&#x27;</span></span><br><span class="line">  s.source_files = <span class="string">&#x27;DYTest/Classes/**/*&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># s.dependency &#x27;AFNetworking&#x27;, &#x27;~&gt; 2.3&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>其中</p>
+<ul>
+<li>
+<p><a class="link"   target="_blank" rel="noopener" href="http://s.name" >s.name<i class="fas fa-external-link-alt"></i></a> : 你所创建的库的名字，比如Masonry，AFNNetworking等等</p>
+</li>
+<li>
+<p>s.version ： 库的版本号</p>
+</li>
+<li>
+<p>s.summary ： 简短的描述信息</p>
+</li>
+<li>
+<p>s.description ： 比简短描述长一点的描述信息</p>
+</li>
+<li>
+<p>s.homepage ： pod库远程仓库主页地址 我们此次的示例工程的主页就是 <code>http://git.zhcs.com/iOS_Group/DYTest</code></p>
+</li>
+<li>
+<p>s.license ： 遵守的协议</p>
+</li>
+<li>
+<p>s.author ： 创建人</p>
+</li>
+<li>
+<p>s.ios.deployment_target ： 支持的系统版本版本此次示例工程支持到<code>iOS 8.0</code></p>
+</li>
+<li>
+<p>s.source ： 你的pod库的远程仓库路径，我们此次的示例工程的路径就是<code>http://192.168.120.30/iOS_Group/DYTest.git</code></p>
+</li>
+<li>
+<p>s.source_files = 要加入库中的代码在工程中的路径，此次示例工程编写的代码就在之前强调的<code>'DYTest/Classes/**/*'</code>路径下</p>
+</li>
+</ul>
+<h2 id="第二步">第二步</h2>
+<p>当库每个版本代码编写完成后我们需要将pod库代码提交到对应的远程仓库，同时对应的spec文件也要推送到spec文件远程仓库。</p>
+<p>第一步我们完成了spec文件的编写，第二步我们就要推送spec文件，此次示例工程我们的spec文件远程仓库就是我们前文所创建的<code>http://192.168.120.30/iOS_Group/DYTestSpecs.git</code></p>
+<p>我们先对spec文件做一个本地校验看看是否有配置错误：</p>
+<p>进入spec文件所在目录<br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.34.53.png"
+                      alt="屏幕快照 2019-07-28 下午2.34.53"
+                ></p>
+<p>执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod lib lint </span><br></pre></td></tr></table></figure>
+<p>当你在spec文件所在目录并且只有一个spec文件时候你可以这么写，否则你需要指定你要校验的spec文件用如下写法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod lib lint DYTest.podspec</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bfba9b2458c4400a8600321c2772d68c~tplv-k3u1fbpfcp-zoom-1.image"
-                      alt=""
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.39.19.png"
+                      alt="屏幕快照 2019-07-28 下午2.39.19"
                 ></p>
-<p>大概断断续续看了一个月左右，把现在项目大体给仿写了一遍，就此，搬砖技能+1</p>
-<p>在flutter看的基本能写项目后，本想在项目中应用下来写业务，但是调研了以native为基础的混合开发后发现，坑挺多的，业务闭环问题，路由问题，内存问题，包大小等等，和领导沟通后还是还是求稳为主，没有在项目中使用，但是那个仿写项目我还在继续。</p>
-<h4 id="Vue">Vue</h4>
-<p>大概在三四个月前，项目组有个需求比较重要且紧急，当时的前端同事在做了排期后提出时间可能有点紧，而我当时手头刚好没需求在开发，领导就找到我说要不也参与进来做一些辅助性工作（其实我们公司前端人数挺多的，但是分散在各个项目组，而我们项目组刚好这时资源不太够），听完后我心里一想，可以啊，反正我之前也看过jQuery，有一点点基础，而我自己也有兴趣，于是便参与了进去</p>
-<p>公司前端项目用的是vue2.0，又是一波，文档，资料，看了后感觉，vue入门确实简单，很多东西都是现成的，直接用就好了，UI组件vant类似的库也是开箱即用，不像iOS，除了基本的组件什么都要自己搞，路由要自己搞，数据管理还复杂，就这么搞了大概两周，项目顺利上线，就此，搬砖技能+0.5（因为flutter起码我已经可以完整的写简单的项目了，而前端我只参与了其中的一个模块，不懂的东西茫茫多）</p>
-<p>vue的学习必须要感谢一位<a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/7041494869855961118" >不愿意透漏姓名的老哥<i class="fas fa-external-link-alt"></i></a>，感谢老哥的无私帮助，感谢命运让我们相遇，感谢党和政府给予我们的幸福生活😂😂😂</p>
-<h4 id="英语">英语</h4>
-<p>啊，说起英语，学生时代就让我头痛，没想到毕业后还是要整天接触（真的是没想到，因为我非科班出身，毕业后在对口行业工作了半年后才参加培训转行开发）不过仅仅是开发的话其实对英语要求不高，想要进阶要求才高，毕竟很多文档，资料都是英文的.</p>
-<p>我大概是在前一段时间，在YouTube看视频，看到下边评论，大多数都是英文评论，而我又想知道他们到底说的什么（我知道YouTube自带翻译），我开始尝试着去理解评论，发现只能看个大概，很多单词不认识，所以又萌生了去学英语的想法，我为什么要说又呢？因为之前几乎每年都有这样的想法，但是都没有实际行动，于是我上某乎搜索，学英语app，然后把推荐的七八款app全都下载，一个一个打开看哪个更好用（好看），最终选择了其中的四款，但其实是两家公司的产品，这里我不得不吐槽下，为什么现在都喜欢把一个需求的子需求单独做app，然后开不同的会员，对不同的会员，比如听力，一个app，单词，又一个app，文章阅读再搞一个app，然后每个app都有单独的会员，我屮艸芔茻，产品经理鬼才啊是吧，逮着羊毛使劲薅是吧…</p>
-<p>但是吐槽归吐槽，该学还是要学，从基本的卖火柴的小女孩，阿拉丁神灯这些文章开始看起，每天再背点单词，到现在持续了差不多十天了，也不知道还能坚持几天，会不会像以前一样最后不了了之，总之先就这样吧，起码我目前没有放弃的想法…</p>
-<h4 id="其他无关的书籍">其他无关的书籍</h4>
-<ul>
-<li>
-<p>中间想填充下空虚的精神还看了几本杂书，因为以前很喜欢看雍正王朝电视剧，所以去看完了原著小说，雍正皇帝三部曲《九王夺嫡》《雕弓天狼》《恨水东逝》不得不说，电视拍的好，小说写得也棒；</p>
-</li>
-<li>
-<p>另外今年微博爆出的几篇小作文，把男女性别矛盾推向了新的高峰，我一直觉得性别之上还有人性，我们应该骂的是恶人，而不是性别不同的人，恶人自有法律制裁，而你，只需要做好自己，所以我想知道微博女拳到底在想什么，所以我去看了《女性主义有什么用》希望能了解一二，不过暂时还没看完；</p>
-</li>
-<li>
-<p>而我本人一直很喜欢看历史和自然相关的内容，以前在家整天看中央十套的《探索发现》《科技之光》《动物世界》之类的节目，书籍以前也看过一些，有一天突然在网上看到有人推荐《人类简史：从动物到上帝》，于是便找出来看了下，确实不错，虽然不讲具体的历史事件，但是会从历史进程去思考，更像是一本哲学书籍，目前也没看完，看了一部分，后续会接着继续看；</p>
-</li>
-</ul>
-<h3 id="生活">生活</h3>
-<p>今年，和谈了几年的女朋友也到了谈婚论嫁的地步，女朋友也来到了我工作的城市，围绕着订婚，三金，彩礼，车子等问题我们进行了坦率的沟通，充分交换了意见，进一步增进了双方的了解，顺利的订了婚。</p>
-<p>这期间，我们也闹过矛盾，大多是因为一些很小的，很细微的问题，甚至是一个眼神，一个手势，这让我倍感无奈，有时候对于一件事，明明有性价比更高，更合理简单的处理方式，但是却不去选择更优解，这让我难以理解，而我，只能在一声叹气后走过去，抱住，安慰两句，静静的等情绪的平复，有时候会更严重些，一直闹到半夜，虽然最后我们都会和好如初，但是我还是想说一句，人生啊…</p>
-<h2 id="展望2022">展望2022</h2>
-<p>虽然是一个这么2的年份，我也有些许期待和计划…</p>
-<ul>
-<li>
-<p>据传003要下水，期待满满，不知道有没有机会近距离去看看</p>
-</li>
-<li>
-<p>继续我的英语学习计划</p>
-</li>
-<li>
-<p>继续学习跨端以及前端技术</p>
-</li>
-<li>
-<p>使用flutter开发一个商业级项目</p>
-</li>
-<li>
-<p>看完五本书（太多怕打脸）</p>
-</li>
-<li>
-<p>开始定期写文，以前也写但是随缘，可能半年一年才写一篇</p>
-</li>
-<li>
-<p>体重重回62公斤</p>
-</li>
-<li>
-<p>挣更多的小钱钱（这是最主要的）</p>
-</li>
-<li>
-<p>中个500万吧不用太多😂</p>
-</li>
-</ul>
-<h2 id="结语">结语</h2>
-<p>最后，祝愿世界和平，祖国繁荣昌盛，疫情早日结束，各位事业进步，生活美满，风会指引你们前进的方向，大地母亲与你同在,Lok’Tar Ogar!!!🙏🙏🙏</p>
+<p>第一次执行<code>pod lib lint </code>未成功，报出了⚠️其实这些警告可以忽略，我们只需要加上<code>--allow-warnings</code>参数，可以看到我们第二次执行成功了，如果你想看校验过程还可以在后边添加<code>--verbose</code>参数</p>
+<p>但是只是做本地校验还不够，毕竟我们的库并不是自己玩玩，是需要让其他人也用的，这就需要推送的远端，远端推送之前就需要进行远端校验，不仅查看语法是否正确，也查看你在远端的代码版本和spec文件中的是否匹配。</p>
+<p>我们先给代码打个<code>tag</code>,然后把tag推送到远程，tag版本需要和spec文件中的<code>s.version</code>一致，此处前边我们spec文件中<code>s.version</code>写的是<code>0.1.0</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.51.27.png"
+                      alt="屏幕快照 2019-07-28 下午2.51.27"
+                ><br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.51.40.png"
+                      alt="屏幕快照 2019-07-28 下午2.51.40"
+                ></p>
+<p>至此tag已经打完并推送成功，接下来就是对spec文件进行远程校验<br>
+操作和本地校验类似只不过命令不同，执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint --allow-warnings</span><br></pre></td></tr></table></figure>
+<p>结果如下<br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.56.27.png"
+                      alt="屏幕快照 2019-07-28 下午2.56.27"
+                ></p>
+<p>或者我们很自信spec文件绝对没问题，这时候也可以不校验直接推</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push DYTestSpecs *.podspec --sources=http://192.168.120.30/iOS_Group/DYTestSpecs.git,https://github.com/CocoaPods/Specs.git --use-libraries --allow-warnings --verbose</span><br></pre></td></tr></table></figure>
+<p>结果如下:<br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%883.03.05.png"
+                      alt="屏幕快照 2019-07-28 下午3.03.05"
+                ></p>
+<p>一次成功，完美，这里忍不住给自己鼓掌，整个操作行云流水一气呵成如德芙版丝滑中途没出现一点意外和错误，嘴角不自觉扬起了迷人的弧度<br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/2334192-98329dbf4ae5a5bd.jpg"
+                      alt="2334192-98329dbf4ae5a5bd"
+                ></p>
+<p>不过这句命令很长有必要给大家解释下每一部分的含义不然你只会<code>知其然不知其所以然</code>，看看看看，出口成章，小伙子学着点以后要多读书啊。<br>
+其中<code>DYTestSpecs</code>是我们第一篇里讲的，添加进本地repo目录下的示例工程对应的spec工程。</p>
+<p><code>*.podspec</code>中*指通配符，这么写指以<code>.podspec</code>为后缀的文件,你也可以指定对应的spec文件，比如我们的示例工程就可以写成 <code>DYTest.podspec</code>。</p>
+<p><code>--sources</code>指的是要将本地repo目录下<code>DYTestSpecs</code>工程推送的远端路径，如果你只想公司内部使用就可以不写后边的<code>https://github.com/CocoaPods/Specs.git</code></p>
+<h2 id="第三步">第三步</h2>
+<p>创建，编写，校验，推送都完成了，接下来就是使用了，我们先<code>search</code>试一下看能不能搜到我们的库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search DYTest</span><br></pre></td></tr></table></figure>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%883.27.17.png"
+                      alt="屏幕快照 2019-07-28 下午3.27.17"
+                ></p>
+<p>嗯，放心了，搜索的到，那么，接下来，就不用我多说了吧，开始愉快的使用吧~</p>
+<p>**后记：**这两篇文章主要说的是私有pod库的创建，编写及推送流程，实际具体使用过程中可能还会遇到其他问题导致你用的头大，比如操作顺序出错导致配置了不可逆的错误环境，操作的天时不对，坐的位置风水不好等等，总之就是很多不可控，玄学问题，这个在这篇文章就不一一细说，后边有问题可以直接问，或者有时间转门写一下。</p>
 
         </div>
 
@@ -318,11 +371,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：快进来找个地方坐下，一个移动端老菜鸟的2021年度总结</li>
+        <li>本文标题：Pod库创建流程（下）</li>
         <li>本文作者：Lazyloading</li>
-        <li>创建时间：2021-12-19 16:12:09</li>
+        <li>创建时间：2019-07-28 15:41:41</li>
         <li>
-            本文链接：https://lazy.wiki/yearsummary/
+            本文链接：https://lazy.wiki/posts/fcb7297c/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -337,7 +390,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">#年终总结</a>&nbsp;
+                        <a href="/tags/Cocoapods/">#Cocoapods</a>&nbsp;
                     </li>
                 
             </ul>
@@ -349,13 +402,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/sdwebimageredirect/"
+                           href="/posts/7dc3b748/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">SDWebImage链接重定向问题处理</span>
+                                <span class="post-nav-title-item">OCLint静态代码校验初探</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -365,10 +418,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/iospushsimulator/"
+                           href="/posts/440b4e19/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">iOS模拟器推送测试及踩坑</span>
+                                <span class="post-nav-title-item">Pod库创建流程（上）</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -490,7 +543,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E9%A6%962021"><span class="nav-number">1.</span> <span class="nav-text">回首2021</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.2.</span> <span class="nav-text">学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Flutter"><span class="nav-number">1.2.1.</span> <span class="nav-text">Flutter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue"><span class="nav-number">1.2.2.</span> <span class="nav-text">Vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8B%B1%E8%AF%AD"><span class="nav-number">1.2.3.</span> <span class="nav-text">英语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%97%A0%E5%85%B3%E7%9A%84%E4%B9%A6%E7%B1%8D"><span class="nav-number">1.2.4.</span> <span class="nav-text">其他无关的书籍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%B4%BB"><span class="nav-number">1.3.</span> <span class="nav-text">生活</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%95%E6%9C%9B2022"><span class="nav-number">2.</span> <span class="nav-text">展望2022</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">3.</span> <span class="nav-text">结语</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">创建pod库流程(下)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">1.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5"><span class="nav-number">1.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5"><span class="nav-number">1.3.</span> <span class="nav-text">第三步</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

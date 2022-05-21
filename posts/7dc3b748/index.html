@@ -9,7 +9,7 @@
     
     <title>
         
-            iOS模拟器推送测试及踩坑 |
+            OCLint静态代码校验初探 |
         
         Lazyloading
     </title>
@@ -171,7 +171,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">iOS模拟器推送测试及踩坑</span>
+            <span class="title-hover-animation">OCLint静态代码校验初探</span>
         </div>
 
         
@@ -190,8 +190,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2021-12-19 15:43:04</span>
-        <span class="mobile">2021-12-19 15:43</span>
+        <span class="pc">2019-08-19 21:04:41</span>
+        <span class="mobile">2019-08-19 21:04</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -211,7 +211,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/iOS/">iOS</a>&nbsp;
+                        <a href="/tags/OCLint/">OCLint</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,12 +221,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>673 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
         </span>
     
     
@@ -238,34 +238,49 @@
         
 
         <div class="article-content markdown-body">
-            <p><strong>前言：</strong> 现在的App几乎都有推送功能，开发推送功能的时候我们肯定要进行测试，但是之前推送功能只有在真机上才能测试，在<code>Xcode11.4</code>之后，模拟器也支持推送测试，具体操作如下：</p>
-<h3 id="1-创建推送文件">1.创建推送文件</h3>
-<p>内容类似如下格式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;aps&quot;:&#123;</span><br><span class="line">        &quot;alert&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;标题&quot;,</span><br><span class="line">            &quot;body&quot;:&quot;内容辱与共产主义不容辞&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;content-available&quot; : 1,</span><br><span class="line">        &quot;mutable-content&quot; : 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>具体格式根据你们的产品要求，接入极光或者个推的可以在控制台发一条推送打印出具体格式内容查看,将文件保存后缀为<strong>apns</strong>，待会要用到</p>
-<h3 id="2-执行如下命令进行测试">2.执行如下命令进行测试</h3>
-<ol>
-<li>查看已启动模拟器</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl list devices | grep Booted</span><br></pre></td></tr></table></figure>
-<p>会看到类似下面信息，如果没有请先启动模拟器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iPhone 12 Pro (1BEE4182-C934-431E-BCBF-F7676C4C2BFC) (Booted)</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>运行项目在模拟器上后执行相应命令<code>simctl push &lt;device&gt; [&lt;bundle identifier&gt;] (&lt;json file&gt; | -)</code></li>
-</ol>
-<p>示例如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl push Booted com.app.test /Users/lazyloading/Desktop/payload.apns</span><br></pre></td></tr></table></figure>
-<h3 id="3-另外还有一种方式是直接使用推送文件">3.另外还有一种方式是直接使用推送文件</h3>
-<p>将第一步创建的json文件内容稍加修改,具体就是添加了<code>   &quot;Simulator Target Bundle&quot;: &quot;com.app.test&quot;你项目的包名</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;Simulator Target Bundle&quot;: &quot;com.app.test&quot;,</span><br><span class="line">    &quot;aps&quot;:&#123;</span><br><span class="line">        &quot;alert&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;标题&quot;,</span><br><span class="line">            &quot;body&quot;:&quot;内容辱与共产主义不容辞&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;content-available&quot; : 1,</span><br><span class="line">        &quot;mutable-content&quot; : 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后直接拖动文件到模拟器上，出现绿色➕后松手，这样也可以进行推送测试</p>
-<h3 id="踩坑">踩坑</h3>
-<p>到这里按照网上你查看的其他教程应该已经收到测试的推送了，但是我没有&gt;_&lt;!</p>
-<p>原因很简单，没有注册，我的项目中集成的是极光推送，已经存在注册步骤，但是这里依然要我注册，如果你遇到类似的问题，添加如下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[UNUserNotificationCenter.currentNotificationCenter requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionSound  completionHandler:^(BOOL granted, NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@&quot;%d&quot;,granted);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
-<p>这是应该就可以正常收到推送了，但是依然存在几个问题，推送相关的代理方法没有执行，iOS15真机可以，模拟器不行，例如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler </span><br></pre></td></tr></table></figure>
-<p>另外就是前台没法收到推送，退到后台才可以，至少我这里遇到的情况是这样，虽然模拟器支持推送测试，但是依然无法和真机进行比较，最好还是以真机测试为准</p>
+            <h1>OCLint静态代码校验初探</h1>
+<p><strong>“OCLint是一个能够让我们的OC，C，C++代码变得更加优雅的检测分析工具–鲁迅”</strong></p>
+<h4 id="OCLint的目的">OCLint的目的</h4>
+<p>   在开发过程中，特别是团队协作开发中，规范的重要性不言而喻，他可以降低沟通成本，增加代码可读性与可维护性提高可靠性与健壮性，作为一名优秀的开发人员，我们应该不断完善并严格遵守相关规范，但是实际情况是，由于我们的疏忽，或者工期的紧张等因素，导致在某些时候开发过程中变得随心所欲，代码变得为所欲为，进而对后期的维护造成不良影响，甚至原地crash&gt;_&lt;!，而<code>OCLint</code>可以帮助我们来检查代码是否遵守了某些规范，是否存在一些潜在的问题，降低review成本。</p>
+<h4 id="OCLint能检测哪些问题">OCLint能检测哪些问题</h4>
+<p>附官方文档<a class="link"   target="_blank" rel="noopener" href="http://oclint.org" >OCLint<i class="fas fa-external-link-alt"></i></a></p>
+<ul>
+<li>代码长度，过长或过短，包含方法，变量等</li>
+<li>未使用的代码，包括变量和方法</li>
+<li>代码复杂度，多重循环以及多重判断等</li>
+<li>语法错误</li>
+</ul>
+<h4 id="OCLint安装">OCLint安装</h4>
+<p>   OCLint有多种安装方式，此处采取<code>Homebrew</code>安装，so 默认你的电脑已经安装了<code>Homebrew</code>,如果没安装，请先去安装<a class="link"   target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn.html" >Homebrew<i class="fas fa-external-link-alt"></i></a>,一次就够，你会爱上它的😊</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap oclint/formulae</span><br><span class="line">brew install oclint</span><br></pre></td></tr></table></figure>
+<p>  为什么要执行第一句？因为要先安装<code>OCLint</code>的依赖，否则会报错，安装结束执行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oclint --version</span><br></pre></td></tr></table></figure>
+<p>  如果出现类似下面的信息，说明安装成功</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LLVM (http://llvm.org/):</span><br><span class="line">LLVM version 5.0.0svn-r313528</span><br><span class="line">Optimized build.</span><br><span class="line">Default target: x86_64-apple-darwin18.6.0</span><br><span class="line">Host CPU: skylake</span><br><span class="line"></span><br><span class="line">OCLint (http://oclint.org/):</span><br><span class="line">OCLint version 0.13.</span><br><span class="line">Built Sep 18 2017 (08:58:40).</span><br></pre></td></tr></table></figure>
+<p>  紧接着安装<code>xcpretty</code>这个东西是什么呢？它可以格式化<code>xcodebuild</code>的输出，增加可读性并可以生成报告,执行下面命令安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install xcpretty</span><br></pre></td></tr></table></figure>
+<p>   安装结束检查是否安装成功</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcpretty -v</span><br></pre></td></tr></table></figure>
+<p>   如果出现类似下面的版本号信息说明安装成功</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.3.0</span><br></pre></td></tr></table></figure>
+<h4 id="OCLint使用">OCLint使用</h4>
+<p>   OCLint作为静态代码检测工具是可以直接在<code>Xcode</code>中使用的，也可以在终端进行操作，本文介绍的是终端操作方式，<code>Xcode</code>使用后续补充；首先进入项目根目录执行如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild clean </span><br><span class="line">xcodebuild analyze | tee xcodebuild.log </span><br></pre></td></tr></table></figure>
+<p>  这一步会对项目进行分析并会在根目录生成一个<code>build</code>目录，并将分析日志输出在<code>xcodebuild.log</code>文件中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild |xcpretty -r json-compilation-database -o compile_commands.json </span><br></pre></td></tr></table></figure>
+<p>  这一步是将编译结果输出在<code>compile_commands.json</code>文件中,这里有一个点要注意的就是，如果你已经编译过并将结果输出在<code>compile_commands.json</code>中，那么再次编译时已编译过的内容是不会被覆盖的，如果希望每次都重头操作，那么可以使用<code>xcodebuild clean</code>命令清除缓存，这也是第一步执行此命令的原因。</p>
+<p>  最后一步是将分析结果生成报告，这中间就会用到各种校验规则了，OCLint默认有些规则，包含了可能出现的大部分场景，当然也可以根据OCLint提供的方法自定义规则,执行如下命令生成报告</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">oclint-json-compilation-database -e Pods -- -report-type html </span><br><span class="line">-rc CYCLOMATIC_COMPLEXITY=5 </span><br><span class="line">-rc TOO_MANY_PARAMETERS=8</span><br><span class="line">-rc NESTED_BLOCK_DEPTH=5</span><br><span class="line">-rc LONG_LINE=200 </span><br><span class="line">-rc NCSS_METHOD=50</span><br><span class="line">-rc LONG_VARIABLE_NAME=30 </span><br><span class="line">-rc SHORT_VARIABLE_NAME=2</span><br><span class="line">-rc LONG_CLASS=1500</span><br><span class="line">-rc LONG_METHOD=150</span><br><span class="line">-disable-rule ShortVariableName </span><br><span class="line">-max-priority-1=10000 </span><br><span class="line">-max-priority-2=10000 </span><br><span class="line">-max-priority-3=10000 &gt; report.html</span><br></pre></td></tr></table></figure>
+<p>  最终会在根目录生成一个<code>report.html</code>文件，点击打开可查看分析结果，大概是下面这个样子<br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s1.ax1x.com/2020/03/19/8yHn8U.md.png"
+                      alt=""
+                ><br>
+  另外上述出现的操作命令为了简便写了一个<a class="link"   target="_blank" rel="noopener" href="https://github.com/shengguangdaren/OCLint.git" >脚本<i class="fas fa-external-link-alt"></i></a>，仅做参考，需要的自取<br>
+  因为我此处只是为了展示，所以创建了一个空项目，并没有写内容，所以分析报告一片空白😂😂😂</p>
+<p>  本篇文章只做OCLint使用的初步介绍，实际上我在安装使用的过程中遇到了很多必然或偶然的坑，另外对于<code>OCLint</code>也并没有做详细的介绍，比如<code>OCLint</code>默认规则的介绍，如何自定义规则，相关套件的作用，以及<code>OCLint</code>的缺点等等，随后有时间我会一一整理补充上来。嗯，就酱~</p>
 
         </div>
 
@@ -273,11 +288,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：iOS模拟器推送测试及踩坑</li>
+        <li>本文标题：OCLint静态代码校验初探</li>
         <li>本文作者：Lazyloading</li>
-        <li>创建时间：2021-12-19 15:43:04</li>
+        <li>创建时间：2019-08-19 21:04:41</li>
         <li>
-            本文链接：https://lazy.wiki/iospushsimulator/
+            本文链接：https://lazy.wiki/posts/7dc3b748/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -292,7 +307,7 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/iOS/">#iOS</a>&nbsp;
+                        <a href="/tags/OCLint/">#OCLint</a>&nbsp;
                     </li>
                 
             </ul>
@@ -304,13 +319,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/yearsummary/"
+                           href="/posts/fc63e88/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">快进来找个地方坐下，一个移动端老菜鸟的2021年度总结</span>
+                                <span class="post-nav-title-item">《你是我兄弟》台词摘录</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
@@ -320,10 +335,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/mysqlerror/"
+                           href="/posts/fcb7297c/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Homebrew 安装Mysql密码忘记解决</span>
+                                <span class="post-nav-title-item">Pod库创建流程（下）</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -445,7 +460,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E6%8E%A8%E9%80%81%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">1.创建推送文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%A7%E8%A1%8C%E5%A6%82%E4%B8%8B%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8C%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">2.执行如下命令进行测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%A6%E5%A4%96%E8%BF%98%E6%9C%89%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%98%AF%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8%E6%8E%A8%E9%80%81%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">3.另外还有一种方式是直接使用推送文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91"><span class="nav-number">4.</span> <span class="nav-text">踩坑</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">OCLint静态代码校验初探</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">OCLint的目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E8%83%BD%E6%A3%80%E6%B5%8B%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">OCLint能检测哪些问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E5%AE%89%E8%A3%85"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">OCLint安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E4%BD%BF%E7%94%A8"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">OCLint使用</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
