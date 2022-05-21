@@ -1,5 +1,8 @@
 ---
-title: 分类
-layout: categories
+title: categories
+type: "categories"
+layout: "categories"
 comments: false
 ---
+
+

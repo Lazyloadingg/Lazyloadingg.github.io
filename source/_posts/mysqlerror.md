@@ -2,6 +2,7 @@
 title: Homebrew 安装Mysql密码忘记解决
 date: 2021-12-19 15:40:17
 tags: Mysql
+categories: 开发
 ---
 
 

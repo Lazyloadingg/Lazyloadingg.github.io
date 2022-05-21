@@ -2,6 +2,7 @@
 title: iOS15推送后台语音播报探索
 date: 2021-12-19 14:38:57
 tags: iOS
+categories: 开发
 ---
 meta <meta name="referrer" content="no-referrer" />
 
