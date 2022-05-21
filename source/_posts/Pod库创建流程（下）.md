@@ -1,8 +1,9 @@
 ---
 title: Pod库创建流程（下）
-date: 2019-07-28 15:41:41
 tags: Cocoapods
 categories: 开发
+abbrlink: fcb7297c
+date: 2019-07-28 15:41:41
 ---
 <meta name="referrer" content="no-referrer" />
  [TOC]

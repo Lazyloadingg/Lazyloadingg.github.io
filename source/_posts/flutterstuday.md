@@ -1,8 +1,9 @@
 ---
 title: 初识Flutter总结
-date: 2021-07-22 22:33:55
 tags: Flutter
 categories: 开发
+abbrlink: 9bd452f5
+date: 2021-07-22 22:33:55
 ---
 <meta name="referrer" content="no-referrer" />
 [toc]

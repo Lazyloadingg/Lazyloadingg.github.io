@@ -1,8 +1,9 @@
 ---
 title: OCLint静态代码校验初探
-date: 2019-08-19 21:04:41
 tags: OCLint
 categories: 开发
+abbrlink: 7dc3b748
+date: 2019-08-19 21:04:41
 ---
 # OCLint静态代码校验初探
 

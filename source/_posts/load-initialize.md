@@ -1,8 +1,9 @@
 ---
 title: load和initialize区别
-date: 2022-04-29 09:47:41
 tags: iOS
 categories: 开发
+abbrlink: a696ae61
+date: 2022-04-29 09:47:41
 ---
 [TOC]
 

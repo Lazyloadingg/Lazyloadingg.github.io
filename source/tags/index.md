@@ -1,6 +1,6 @@
 ---
 title: tags
-type:"tags"
+type: "tags"
 layout: "tags"
 comments: false
 ---

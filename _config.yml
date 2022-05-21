@@ -40,7 +40,10 @@ timezone: ''
 url: https://lazy.wiki
 root: /
 #permalink: :year/:month/:day/:title/
-permalink: :title/
+permalink: posts/:abbrlink/ # 文章底部显示的文章链接，默认会显示中文文章名，显示会有问题，此种方式可解决
+abbrlink:
+  alg: crc32  # 算法：crc16(default) and crc32
+  rep: hex    # 进制：dec(default) and hex
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -57,7 +60,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
+new_post_name: :year/:month/:title.md # File name of new posts，配置文章目录格式格式
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link:
