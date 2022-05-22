@@ -9,7 +9,7 @@
     
     <title>
         
-            load和initialize区别 |
+            疫情于我 |
         
         Lazyloading
     </title>
@@ -171,7 +171,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">load和initialize区别</span>
+            <span class="title-hover-animation">疫情于我</span>
         </div>
 
         
@@ -190,8 +190,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-04-29 09:47:41</span>
-        <span class="mobile">2022-04-29 09:47</span>
+        <span class="pc">2022-05-22 18:22:14</span>
+        <span class="mobile">2022-05-22 18:22</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -199,7 +199,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E5%BC%80%E5%8F%91/">开发</a>&nbsp;
+                        <a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>&nbsp;
                     </li>
                 
             </ul>
@@ -211,7 +211,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/iOS/">iOS</a>&nbsp;
+                        <a href="/tags/%E7%96%AB%E6%83%85/">疫情</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,12 +221,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>743 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.4k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>11 分钟</span>
         </span>
     
     
@@ -238,89 +238,39 @@
         
 
         <div class="article-content markdown-body">
-            <p>[TOC]</p>
-<p>最近在群里突然有群友问load和initialize区别，我心想这不简单吗，脑海中瞬间冒出两条，然后就想不起来了，然后看到群友七嘴八舌一人一个说法，我就寻思重新回顾下这个知识点，遂做个回顾。</p>
-<p>这篇文章是我结合网上资料，官方文档，和runtime源码整理得出的，在说明结论时我会在结论前附带官方文档解释并会在（）附带自己的理解，如果理解有误还请指正；你也可以写个demo去验证，我顺手在项目中验证了下所以就不贴代码了。</p>
-<h3 id="调用方式">调用方式</h3>
-<blockquote>
-<ul>
-<li>OBJC_EXPORT void _objc_load_image(HMODULE image, header_info *hinfo)<br>
-{<br>
-prepare_load_methods(hinfo);<br>
-call_load_methods();<br>
-}<br>
-可以下载源码(objc4-818.2源码)点<code>objc-os</code>文件进去查看<code>_objc_load_image -&gt; call_load_methods -&gt; call_load_methods -&gt; call_class_loads -&gt; (*load_method(cls,@selector(load));</code></li>
-</ul>
-</blockquote>
-<ul>
-<li>load通过函数地址调用</li>
-</ul>
-<blockquote>
-<ul>
-<li>The runtime sends initialize to each class in a program just before the class, or any class that inherits from it, is sent its first message from within the program. Superclasses receive this message before their subclasses.</li>
-</ul>
-</blockquote>
-<ul>
-<li>initialize通过objc_msgSend（runtime消息发送）调用</li>
-</ul>
-<h3 id="调用时机">调用时机</h3>
-<blockquote>
-<ul>
-<li>Invoked whenever a class or category is added to the Objective-C runtime; implement this method to perform class-specific behavior upon loading.</li>
-</ul>
-</blockquote>
-<ul>
-<li>load是runtime加载类、分类的时候调用(只会调用一次)</li>
-</ul>
-<blockquote>
-<ul>
-<li>Initializes the class before it receives its first message.</li>
-<li>The superclass implementation may be called multiple times if subclasses do not implement initialize—the runtime will call the inherited implementation—or if subclasses explicitly call [super initialize].</li>
-</ul>
-</blockquote>
-<ul>
-<li>initialize是类第一次接收到消息的时候调用（可以在main前也可以在后，看什么时候第一次接收消息）, 每一个类只会initialize一次(如果子类没有实现initialize方法, 会调用父类的initialize方法, 所以父类的initialize方法可能会调用多次)</li>
-</ul>
-<p><strong>以上的调用一次指的是程序生命周期内默认只调用一次，但是如果你手动调用的话还是会调用多次</strong></p>
-<h3 id="调用顺序">调用顺序</h3>
-<blockquote>
-<ul>
-<li>A class’s +load method is called after all of its superclasses’ +load methods.</li>
-<li>A category +load method is called after the class’s own +load method.</li>
-</ul>
-</blockquote>
-<ul>
-<li>load
-<ol>
-<li>先调用类的load, 再调用分类的load</li>
-<li>先调用父类的load，再调用子类的load</li>
-<li>先编译的类（分类），先调用</li>
-</ol>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li>The runtime sends initialize to each class in a program just before the class, or any class that inherits from it, is sent its first message from within the program. Superclasses receive this message before their subclasses.</li>
-<li>The superclass implementation may be called multiple times if subclasses do not implement initialize—the runtime will call the inherited implementation—or if subclasses explicitly call [super initialize].</li>
-</ul>
-</blockquote>
-<ul>
-<li>initialize
-<ol>
-<li>先调用父类，再调用子类（即使你先给子类发消息，子类默认也会先调用父类）</li>
-<li>如果子类没实现initialize，会向上调用父类</li>
-<li>如果分类实现initialize，则会覆盖本类的initialize（因为是objc_msgSend消息发送调用，分类方法加载时会插入在本类前）</li>
-</ol>
-</li>
-</ul>
-<h3 id="资料">资料</h3>
-<ul>
-<li>如果你不清楚怎么查看官方文档:<br>
-<code>  Xcode -&gt; Help -&gt; Developer Documentation</code><br>
-或者你也可以下载<code>Dash</code>查阅</li>
-<li>如果你想查看源码：<br>
-<a class="link"   target="_blank" rel="noopener" href="https://opensource.apple.com/tarballs/objc4/" >runtime源码下载<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
+            <p>受疫情影响，截止到今天，我已经居家办公59天，足不出户封闭52天，这将近两个月的是将，我的心态不断变化，甚至可能影响以后的我。</p>
+<h3 id="天真">天真</h3>
+<p>其实在我没有开始居家办公的时候，疫情已经小规模扩散开了，我记得通知居家办公前几天，我们公司还有一位同事不幸确诊，当时我们也是人心惶惶，心里边多少有点害怕，不过因为不在同一个楼层，并且在他确诊前后也没有来过我们楼层，所以虽然害怕，但是也相信政府和公司，并没有太多担心。<br>
+在真正通知居家办公时，只有浦东，徐汇等区比较严重，我所在的区还好，起码那几天出门，交通都没有限制，不过按照当时的趋势，我也明白我们封闭也只是时间问题，所以那几天我就尽量每天出门买菜，说实话，那几天买菜明显感觉到菜价比平时贵了许多，娃娃菜，生菜等常吃的都涨到了七八块，青椒将近十块，而本来已经降价的猪肉也重新涨到了20+，但是即使贵也要买，心想就这一段，过去了就好了，但后来铺天盖地的负面事实证明，我太天真了。</p>
+<h3 id="食物">食物</h3>
+<p>大概是三月底二十七八号左右吧，正式通知要足不出户居家隔离，以黄浦江为界，浦西开始时间从四月一号开始，到四月五号，我就在浦西，当时我是真的相信到四月五号会结束封闭，我还劝我女朋友，魔都毕竟是魔都，不用太过担心，这时候其实我储备了大约一周的食物，都是提前买的，包括菜油大米之类的，但事实证明我确实对上海抱有了过分的信心。<br>
+第一天小区还发了物资，我之前就听说上海政府会在隔离期间发放物资，但是我收到的第一次物资实在是一言难尽，当时我就想，除非实在没有吃的，否则绝不动用这次的物资，<br>
+<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205221649723.jpg"
+                      alt="第一次物资"
+                ><br>
+四月五号，并没有解封，但这时候，菜市场已经关闭，美团买菜，盒马，叮咚买菜也都被关闭，我终于意识到，网上流传的，在家没有吃的等死的事情，真的会发生，后续的事情大家也都知道，各个区都开始有倒卖物资，高价团购，以物易物等，后续又发放了四五次物资，都很不错，我也很感谢社区，感谢伸出援手的企业</p>
+<p>整体来看，直到现在，疫情在家两个月，虽然瘦了十斤左右，但是在有团购和物资的情况下，我并没有感觉自己被饿到。</p>
+<h3 id="医疗">医疗</h3>
+<p>这还不止，吃只是一方面，要知道疫情下社会停摆的影响是巨大的，医疗资源挤兑严重，大部分的医疗资源都被调去优先处理解决疫情，那么其他患者获得的医疗资源就会减少，甚至是没有，果然，没过几天，网上开始爆出各种，化疗无法就医，孕妇无法就医，其他病症就医因不能出具有效核酸证明而被拒之门外导致耽误最佳治疗时间，加重了病情甚至死亡，著名经济学家郎咸平的母亲也收到了影响，真的是应了那句话，时代的一粒灰，落在一个家庭，一个人身上就是一座山。</p>
+<p>为了尽快结束疫情，核酸检测一次接一次，但中间有个插曲让我觉得无法理解，我们楼上有邻居确诊被拉去方舱，可是作为同一栋楼的我们，居然在三天后才知道这件事，这中间我们还每天下楼丢垃圾，知道这件事情后我们非常气愤，询问为什么居委不告知我们?同一栋楼的我们不更应该知道，然后做好防护措施吗？而这时候的居委就像消失了一样，群里@也毫无反应，不过还好，最后大家都没事，但是你以为就这么结束了吗？并没有。</p>
+<p>自从楼栋出现确诊后，本来几天做一次的核酸检测也停了，注意停的只是我们，到了检测日期，其他楼栋都是正常检测， 唯独将我们楼忽略了，询问居委，得到的回答是，大白从上午工作到下午两三点累了，改天再做。我？？？，我们50号楼，旁边的49号，51号都做了我们就在他们中间没有做是因为大白累了？？？这时候我们其实根本不相信他的说辞，大家都开始猜测，是不是因为楼上有确诊，害怕我们也有感染处于潜伏期，下楼做核酸再感染其他人，但是这种情况的我们不是更应该做检测？如果不能下楼去做，检测最后大白上门做总可以吧？既然检测力度这么大，甚至将其他的医疗资源都优先用于新冠疫情，做到这点不是更应该？总之这件事让我无法理解。</p>
+<p>这中间有件事也让我彻底吓坏了，但是又只能强作镇定，我女朋友突然发烧了，最高到38.4，明明中午吃饭时候还好好的没问题，下午三点钟就开始觉得不舒服，量了下体温37.6，我让她吃了点社区发放的连花清瘟，因为家里没有其他的退烧药，只有这个写的有退烧功效，但事实证明并没有什么卵用，吃过药后过了一个半小时再次量体温，烧的更严重了，我开始在群里询问哪位邻居家有药，很幸运邻居们都很有爱，纷纷说自己家里有你可以过来拿，于是我去了最先回答的那位邻居家，他们给的是布洛芬，不过是小孩子吃的那种，但据他说他之前吃过有效，回去立马让我女朋友吃了点后让他睡下，到了奖金八点，再次量体温，降下来了点，但是仍然在37度多点，这时候我看距离上次吃药已经过了将近四个小时，于是又让她吃了点睡下。</p>
+<p>第二天早上起床后就立马量体温，还是37度，不过我已经不像昨晚那么担心了，后续又发生了很多事，有其他邻居给了头孢，居委打电话询问病情，本计划的全员核酸也不让我们去做了，最后还是以为热心的大白上门给我女朋友做了核酸，她在前一天还送了退烧贴给我们，我真的很感谢她，后来本以为没事了，谁想到提问重新升到了38左右，这时候我是真的有点恐慌了，但是如果我表现的很明显的话只会让情况更糟，所以只能故作镇定，我开始联系大白和居委如何才能去医院，而邻居也开始不断的说让我们去医院，我明白，这时候发烧，不是一个人的事情，其实邻居们也还怕，但是我没想到我女朋友会抗拒，好说歹说就是不愿去医院，我很无奈甚至有点生气，在外邻居们在非议，当然他们也是出于好心我并不怪罪他们，反而感谢他们伸出援手，在内还要被女朋友怪罪说把病情发在群里，说实话我那时候确实有点生气，但是忍了下来，我说到中午，如果体温还起伏的话，别再说别的，去医院，这次他终于答应，很幸运，中午的体温正常了，后边每隔一个小时都量一次体温，直到晚上都没有异常，此时我悬着的心终于放了下来，哎。</p>
+<h3 id="工作">工作</h3>
+<p>由于工作性质的原因，虽然居家办公，但其实对工作效率的影响并不大，依然是每天晨会沟通工作计划，视频会议沟通各种需求，技术方案，随后开发，测试等等。一切有条不紊的推进。</p>
+<p>但是大概在居家二十多天，将近一个月后，我开始变得有点烦躁，开始怀念去公司上班的日子，因为我发现居家办公久了之后，很容易被其他事情分散注意力，很难专注在工作上，对于不太复杂的任务还好，相对复杂一点的任务这种状态是不可取的，我询问了朋友和同事，发现他们都有这种感受，我不知道这是错觉，还是因为隔离久了后情绪发生的莫名的变化</p>
+<h3 id="学习">学习</h3>
+<p>有更多的在家时间，也意味着有更多的时间可以放在工作之外，比如游戏，音乐，社交软件等等，但是同样在一段时间后，突然有那么些瞬间，觉得这些都无关紧要，也可能是因为每天都吃自己爱吃的菜同样会腻的原因；这中间的一天我无意中打开脉脉，突然认识到一件事，疫情导致社会的停摆，怎么可能只影响到吃喝与医疗？看看脉脉不断有人哀叹失业，哀叹工作难找就明白了，疫情的影响是方方面面的！</p>
+<p>我终于开始关注之前被我不自觉忽略的新闻，就业形势，大厂裁员，季度GDP大幅下降，这让我恐慌，恐慌情绪支配下的我，对于什么游戏，社交，更加失去兴趣，我开始想，我如果被毕业了怎么办，我如果被社会淘汰了怎么办？我的房租，房贷，吃穿用度怎么办？这让我非常焦虑，好几个夜晚，躺在床上都在想这些事情，特别是看到我那小傻瓜一样的女朋友每天就是看看韩剧，看看综艺，刷刷微博，看看吃播我就更无语，我心想，你难道从来不担心这些的吗？万一我失业了交不起房租，我们住哪？万一将来找不到工作，房贷逾期怎么办？</p>
+<p>连续几天我被这种焦虑情绪支配，我知道我不能一直这样，我开始想办法摆脱这种困境，于是我开始看书，开始看技术文章，开始学习，其实我一直有在学习，但之前的纯属于兴趣使然，从没有像这样担心将来到焦虑，逼着自己去学习。</p>
+<p>连续一周不停的学习，白天有空就看文章，晚上吃了饭就开始敲代码验证想法，甚至关了灯躺在床上还在想，这么问题怎么解决？事后来看，那几天的我简直魔怔了，魔怔到有点好笑，虽然现在我学习的强度比前一段有所下降，但是依然保持每天学习从不拉下，而就这么持续了一二十天后，我发现这中间我完全没想起来去玩游戏，是真的没想起来，就想他们本身就不存在一样，而这种状态下得我感到了一种格外的充实和安全感。</p>
+<p>而这中间我也认识到了很多的不足，所以暂时有个想法，我想重新开始学习开发，从那些最基础的，最简单的东西开始，把自己当成一个初出校门的小白，重新认识自己这个行业。</p>
+<p>再后来，我不满足于看电子书，看技术文章，看源码，看视频，我翻出了吃灰许久的实体书籍，开始得空就在阳台坐着翻看，安静的傍晚，或是夜幕降临后，坐在沙发上，一个人看着书，偶尔抬头望向我那小傻子一样又在看不知道什么综艺的女朋友，我觉得，可能现在的我想太多只会让自己变得更加沮丧，在疫情下无法出门，社会停摆，无论什么想太多都是一种负担，不如趁这段时间提升自己，不是有那句话吗，你若盛开，蝴蝶自来。</p>
+<h3 id="最后">最后</h3>
+<p>啰嗦了这么多，都不知道自己在说些什么了，在家这两个月还发生了许多事情，有好的，有坏的，很多都没有在这里写出来，有关于个人的，有关于这座城市的，但是这两个月下来我的心态确实发生了变化，对工作，对生活，对学习，或许这种心态会影响我一生，或许是一阵，这知道呢，不过我清楚的是，无论影响多久，这都是我，我走过的路，我经历过的好的，坏的，所有事情，构成了现在的我，用一句话来说就是，我与我周旋久，宁做我。</p>
 
         </div>
 
@@ -328,11 +278,11 @@ call_load_methods();<br>
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：load和initialize区别</li>
+        <li>本文标题：疫情于我</li>
         <li>本文作者：Lazyloading</li>
-        <li>创建时间：2022-04-29 09:47:41</li>
+        <li>创建时间：2022-05-22 18:22:14</li>
         <li>
-            本文链接：https://lazy.wiki/posts/a696ae61/
+            本文链接：https://lazy.wiki/posts/6a6dcc9e/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -347,7 +297,7 @@ call_load_methods();<br>
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/iOS/">#iOS</a>&nbsp;
+                        <a href="/tags/%E7%96%AB%E6%83%85/">#疫情</a>&nbsp;
                     </li>
                 
             </ul>
@@ -356,29 +306,14 @@ call_load_methods();<br>
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/posts/6a6dcc9e/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">疫情于我</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/posts/6e29e650/"
+                           href="/posts/a696ae61/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">《人类简史：从动物到上帝》随性笔记</span>
+                                <span class="post-nav-title-item">load和initialize区别</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -500,7 +435,7 @@ call_load_methods();<br>
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">调用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">调用时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E9%A1%BA%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">调用顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">资料</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A9%E7%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">天真</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%9F%E7%89%A9"><span class="nav-number">2.</span> <span class="nav-text">食物</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BB%E7%96%97"><span class="nav-number">3.</span> <span class="nav-text">医疗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol>
     </div>
 </div>
         </aside>
