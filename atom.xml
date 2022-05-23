@@ -6,7 +6,7 @@
   <link href="https://lazy.wiki/atom.xml" rel="self"/>
   
   <link href="https://lazy.wiki/"/>
-  <updated>2022-05-22T10:27:20.657Z</updated>
+  <updated>2022-05-23T09:43:42.554Z</updated>
   <id>https://lazy.wiki/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>重学网络(一)</title>
+    <link href="https://lazy.wiki/posts/49b8739d/"/>
+    <id>https://lazy.wiki/posts/49b8739d/</id>
+    <published>2022-05-23T09:42:14.000Z</published>
+    <updated>2022-05-23T09:43:42.554Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h3 id="计算机通信基础">计算机通信基础</h3><ol><li>IP地址：通过IP地址找到主机</li><li>MAC地址（网卡地址）：网卡接收数据决定要不要继续处理</li></ol><h3 id="连接方式">连接方式</h3><h4 id="网线直连">网线直连</h4><p>两台设备间通过交叉线直连通信，知道对方ip后先通过ARP广播获取对方mac地址，ARP广播会给同网段所有链接的设备发送消息询问mac地址，接收方收到询问后发现是找自己的mac地址则回复自己的mac地址，如果不是找自己就丢弃不处理</p><h4 id="同轴电缆">同轴电缆</h4><p><strong>优点：</strong></p><ol><li>可以连接多台设备，</li></ol><p><strong>缺点：</strong></p><ol><li>半双工通信（双发可以互发消息但不能同时）</li><li>不安全，arp会讲广播发给连接的所有设备</li><li>某一段断掉，网络瘫痪</li></ol><p>连接的多台设备当有设备同事发消息，就会产生冲突，这样就形成了一个冲突域，</p><h4 id="集线器">集线器</h4><p>同同轴电缆类似，只不过当某一段断掉，不影响其他设备</p><h4 id="网桥">网桥</h4><ol><li>可以连接多个集线器，但又能隔绝冲突域</li><li>可以记录mac地址，当arp广播询问mac地址时，会记录请求与响应设备的mac地址，当再次有arp广播时，会判断记录的mac地址属于哪个冲突域，然后只将消息发送到这个域</li></ol><h4 id="交换机">交换机</h4><ol><li>全双工通信</li><li>集线器与网桥功能的结合体，可以记录mac地址，又能连接多个设备</li><li>比集线器安全</li></ol><h4 id="路由器">路由器</h4><p>以上的几种通信方式要求：</p><ol><li>连接的设备要在同一网段</li><li>连接的设备在同一广播域</li></ol><p>那么如果全世界的设备都通过以上方式连接，所有设备就在一个网段也就是同一个广播域，一个设备发送ARP广播，其他几十亿设备都会收到，这是不安全的，并且这样做IP地址也会不够</p><p>所以怎么在不同网段通信？路由器可以解决</p><ol><li>可以在不同网段发送数据</li><li>可以隔绝广播域</li></ol><p><strong>概括·</strong></p><ol><li>路由器上有多个网关端口，每个网关可以设置自己的IP，通过设置IP地址（和要连接的网段一致）接入一个网段，通过此方式可以将多个网段连接起来</li><li>计算机发起通信前会判断目标IP和自己是否属于同一网段，如果是，则发起ARP广播获取目标MAC地址，如果不是则发起ARP广播获取网关的MAC地址；获取MAC地址前提是知道IP，计算机只知道自己要发送目标的IP，并不知道网关的IP，所以计算机的网络设置中如果是静态配置要手动配置一个默认网关地址（计算机网络设置中，显示&quot;路由器地址&quot;指的就是路由器网关地址），如果是DHCP则会自动获取</li><li>获取到网关MAC地址后将数据包发给网关</li><li>网关收到数据包后，通过目标网段对应的网关，发送ARP广播到对应网段获取目标MAC地址</li><li>目标设备收到数据后，回传数据给源设备完成跨网段通信</li></ol><h3 id="补充">补充</h3><ul><li>同一个网段，代表在同一个广播域，代表可以收到同样的ARP广播</li><li>每个网卡都有一个全球唯一的MAC地址，固化在网卡硬件上，它由6字节也就是48位标识，前三字节由IEEE（注册管理机构）分配给厂商，后三字节厂商自行分配，<a class="link"   href="https://standards-oui.ieee.org/oui/oui.txt" >查看地址<i class="fas fa-external-link-alt"></i></a></li></ul><h4 id="ARP协议"><a class="link"   href="https://baike.baidu.com/item/ARP/609343?fr=aladdin" >ARP协议<i class="fas fa-external-link-alt"></i></a></h4><p>工作过程<br>主机A的IP地址为192.168.1.1，MAC地址为0A-11-22-33-44-01；<br>主机B的IP地址为192.168.1.2，MAC地址为0A-11-22-33-44-02；<br>当主机A要与主机B通信时，地址解析协议可以将主机B的IP地址（192.168.1.2）解析成主机B的MAC地址，以下为工作流程：</p><ol><li>根据主机A上的路由表内容，IP确定用于访问主机B的转发IP地址是192.168.1.2。然后A主机在自己的本地ARP缓存中检查主机B的匹配MAC地址。</li><li>如果主机A在ARP缓存中没有找到映射，它将询问192.168.1.2的硬件地址，从而将ARP请求帧广播到本地网络上的所有主机。源主机A的IP地址和MAC地址都包括在ARP请求中。本地网络上的每台主机都接收到ARP请求并且检查是否与自己的IP地址匹配。如果主机发现请求的IP地址与自己的IP地址不匹配，它将丢弃ARP请求。</li><li>主机B确定ARP请求中的IP地址与自己的IP地址匹配，则将主机A的IP地址和MAC地址映射添加到本地ARP缓存中。</li><li>主机B将包含其MAC地址的ARP回复消息直接发送回主机A。</li><li>当主机A收到从主机B发来的ARP回复消息时，会用主机B的IP和MAC地址映射更新ARP缓存。本机缓存是有生存期的，生存期结束后，将再次重复上面的过程。主机B的MAC地址一旦确定，主机A就能向主机B发送IP通信了。</li></ol><p>如果目标MAC地址全是F则表示这是一个广播</p><h4 id="ICMP协议"><a class="link"   href="https://baike.baidu.com/item/ICMP/572452?fr=aladdin" >ICMP协议<i class="fas fa-external-link-alt"></i></a></h4><p>ICMP是“Internet Control Message Protocol”（Internet控制消息协议）的缩写。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。<br>ICMP唯一的功能是报告问题而不是纠正错误，纠正错误的任务由发送方完成。<br><strong>ping命令使用的就是ICMP协议</strong></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h3 id=&quot;计算机通信基础&quot;&gt;计算机通信基础&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;IP地址：通过IP地址找到主机&lt;/li&gt;
+&lt;li&gt;MAC地址（网卡地址）：网卡接收数据决定要不要继续处理&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;连接方式&quot;&gt;连接方式&lt;/h3&gt;
+</summary>
+      
+    
+    
+    
+    <category term="开发" scheme="https://lazy.wiki/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="重学开发" scheme="https://lazy.wiki/tags/%E9%87%8D%E5%AD%A6%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="网络" scheme="https://lazy.wiki/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>疫情于我</title>

@@ -9,7 +9,7 @@
     
     <title>
         
-            OCLint静态代码校验初探 |
+            重学网络(一) |
         
         Lazyloading
     </title>
@@ -171,7 +171,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">OCLint静态代码校验初探</span>
+            <span class="title-hover-animation">重学网络(一)</span>
         </div>
 
         
@@ -190,8 +190,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2019-08-19 21:04:41</span>
-        <span class="mobile">2019-08-19 21:04</span>
+        <span class="pc">2022-05-23 17:42:14</span>
+        <span class="mobile">2022-05-23 17:42</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -211,7 +211,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/OCLint/">OCLint</a>&nbsp;
+                        <a href="/tags/%E9%87%8D%E5%AD%A6%E5%BC%80%E5%8F%91/">重学开发</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,12 +225,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
         </span>
     
     
@@ -238,49 +242,82 @@
         
 
         <div class="article-content markdown-body">
-            <h1>OCLint静态代码校验初探</h1>
-<p><strong>“OCLint是一个能够让我们的OC，C，C++代码变得更加优雅的检测分析工具–鲁迅”</strong></p>
-<h4 id="OCLint的目的">OCLint的目的</h4>
-<p>   在开发过程中，特别是团队协作开发中，规范的重要性不言而喻，他可以降低沟通成本，增加代码可读性与可维护性提高可靠性与健壮性，作为一名优秀的开发人员，我们应该不断完善并严格遵守相关规范，但是实际情况是，由于我们的疏忽，或者工期的紧张等因素，导致在某些时候开发过程中变得随心所欲，代码变得为所欲为，进而对后期的维护造成不良影响，甚至原地crash&gt;_&lt;!，而<code>OCLint</code>可以帮助我们来检查代码是否遵守了某些规范，是否存在一些潜在的问题，降低review成本。</p>
-<h4 id="OCLint能检测哪些问题">OCLint能检测哪些问题</h4>
-<p>附官方文档<a class="link"   target="_blank" rel="noopener" href="http://oclint.org" >OCLint<i class="fas fa-external-link-alt"></i></a></p>
+            <p>[TOC]</p>
+<h3 id="计算机通信基础">计算机通信基础</h3>
+<ol>
+<li>IP地址：通过IP地址找到主机</li>
+<li>MAC地址（网卡地址）：网卡接收数据决定要不要继续处理</li>
+</ol>
+<h3 id="连接方式">连接方式</h3>
+<h4 id="网线直连">网线直连</h4>
+<p>两台设备间通过交叉线直连通信，知道对方ip后先通过ARP广播获取对方mac地址，ARP广播会给同网段所有链接的设备发送消息询问mac地址，接收方收到询问后发现是找自己的mac地址则回复自己的mac地址，如果不是找自己就丢弃不处理</p>
+<h4 id="同轴电缆">同轴电缆</h4>
+<p><strong>优点：</strong></p>
+<ol>
+<li>可以连接多台设备，</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>半双工通信（双发可以互发消息但不能同时）</li>
+<li>不安全，arp会讲广播发给连接的所有设备</li>
+<li>某一段断掉，网络瘫痪</li>
+</ol>
+<p>连接的多台设备当有设备同事发消息，就会产生冲突，这样就形成了一个冲突域，</p>
+<h4 id="集线器">集线器</h4>
+<p>同同轴电缆类似，只不过当某一段断掉，不影响其他设备</p>
+<h4 id="网桥">网桥</h4>
+<ol>
+<li>可以连接多个集线器，但又能隔绝冲突域</li>
+<li>可以记录mac地址，当arp广播询问mac地址时，会记录请求与响应设备的mac地址，当再次有arp广播时，会判断记录的mac地址属于哪个冲突域，然后只将消息发送到这个域</li>
+</ol>
+<h4 id="交换机">交换机</h4>
+<ol>
+<li>全双工通信</li>
+<li>集线器与网桥功能的结合体，可以记录mac地址，又能连接多个设备</li>
+<li>比集线器安全</li>
+</ol>
+<h4 id="路由器">路由器</h4>
+<p>以上的几种通信方式要求：</p>
+<ol>
+<li>连接的设备要在同一网段</li>
+<li>连接的设备在同一广播域</li>
+</ol>
+<p>那么如果全世界的设备都通过以上方式连接，所有设备就在一个网段也就是同一个广播域，一个设备发送ARP广播，其他几十亿设备都会收到，这是不安全的，并且这样做IP地址也会不够</p>
+<p>所以怎么在不同网段通信？路由器可以解决</p>
+<ol>
+<li>可以在不同网段发送数据</li>
+<li>可以隔绝广播域</li>
+</ol>
+<p><strong>概括·</strong></p>
+<ol>
+<li>路由器上有多个网关端口，每个网关可以设置自己的IP，通过设置IP地址（和要连接的网段一致）接入一个网段，通过此方式可以将多个网段连接起来</li>
+<li>计算机发起通信前会判断目标IP和自己是否属于同一网段，如果是，则发起ARP广播获取目标MAC地址，如果不是则发起ARP广播获取网关的MAC地址；获取MAC地址前提是知道IP，计算机只知道自己要发送目标的IP，并不知道网关的IP，所以计算机的网络设置中如果是静态配置要手动配置一个默认网关地址（计算机网络设置中，显示&quot;路由器地址&quot;指的就是路由器网关地址），如果是DHCP则会自动获取</li>
+<li>获取到网关MAC地址后将数据包发给网关</li>
+<li>网关收到数据包后，通过目标网段对应的网关，发送ARP广播到对应网段获取目标MAC地址</li>
+<li>目标设备收到数据后，回传数据给源设备完成跨网段通信</li>
+</ol>
+<h3 id="补充">补充</h3>
 <ul>
-<li>代码长度，过长或过短，包含方法，变量等</li>
-<li>未使用的代码，包括变量和方法</li>
-<li>代码复杂度，多重循环以及多重判断等</li>
-<li>语法错误</li>
+<li>同一个网段，代表在同一个广播域，代表可以收到同样的ARP广播</li>
+<li>每个网卡都有一个全球唯一的MAC地址，固化在网卡硬件上，它由6字节也就是48位标识，前三字节由IEEE（注册管理机构）分配给厂商，后三字节厂商自行分配，<a class="link"   target="_blank" rel="noopener" href="https://standards-oui.ieee.org/oui/oui.txt" >查看地址<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
-<h4 id="OCLint安装">OCLint安装</h4>
-<p>   OCLint有多种安装方式，此处采取<code>Homebrew</code>安装，so 默认你的电脑已经安装了<code>Homebrew</code>,如果没安装，请先去安装<a class="link"   target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn.html" >Homebrew<i class="fas fa-external-link-alt"></i></a>,一次就够，你会爱上它的😊</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap oclint/formulae</span><br><span class="line">brew install oclint</span><br></pre></td></tr></table></figure>
-<p>  为什么要执行第一句？因为要先安装<code>OCLint</code>的依赖，否则会报错，安装结束执行：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oclint --version</span><br></pre></td></tr></table></figure>
-<p>  如果出现类似下面的信息，说明安装成功</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LLVM (http://llvm.org/):</span><br><span class="line">LLVM version 5.0.0svn-r313528</span><br><span class="line">Optimized build.</span><br><span class="line">Default target: x86_64-apple-darwin18.6.0</span><br><span class="line">Host CPU: skylake</span><br><span class="line"></span><br><span class="line">OCLint (http://oclint.org/):</span><br><span class="line">OCLint version 0.13.</span><br><span class="line">Built Sep 18 2017 (08:58:40).</span><br></pre></td></tr></table></figure>
-<p>  紧接着安装<code>xcpretty</code>这个东西是什么呢？它可以格式化<code>xcodebuild</code>的输出，增加可读性并可以生成报告,执行下面命令安装</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install xcpretty</span><br></pre></td></tr></table></figure>
-<p>   安装结束检查是否安装成功</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcpretty -v</span><br></pre></td></tr></table></figure>
-<p>   如果出现类似下面的版本号信息说明安装成功</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.3.0</span><br></pre></td></tr></table></figure>
-<h4 id="OCLint使用">OCLint使用</h4>
-<p>   OCLint作为静态代码检测工具是可以直接在<code>Xcode</code>中使用的，也可以在终端进行操作，本文介绍的是终端操作方式，<code>Xcode</code>使用后续补充；首先进入项目根目录执行如下命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild clean </span><br><span class="line">xcodebuild analyze | tee xcodebuild.log </span><br></pre></td></tr></table></figure>
-<p>  这一步会对项目进行分析并会在根目录生成一个<code>build</code>目录，并将分析日志输出在<code>xcodebuild.log</code>文件中</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild |xcpretty -r json-compilation-database -o compile_commands.json </span><br></pre></td></tr></table></figure>
-<p>  这一步是将编译结果输出在<code>compile_commands.json</code>文件中,这里有一个点要注意的就是，如果你已经编译过并将结果输出在<code>compile_commands.json</code>中，那么再次编译时已编译过的内容是不会被覆盖的，如果希望每次都重头操作，那么可以使用<code>xcodebuild clean</code>命令清除缓存，这也是第一步执行此命令的原因。</p>
-<p>  最后一步是将分析结果生成报告，这中间就会用到各种校验规则了，OCLint默认有些规则，包含了可能出现的大部分场景，当然也可以根据OCLint提供的方法自定义规则,执行如下命令生成报告</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">oclint-json-compilation-database -e Pods -- -report-type html </span><br><span class="line">-rc CYCLOMATIC_COMPLEXITY=5 </span><br><span class="line">-rc TOO_MANY_PARAMETERS=8</span><br><span class="line">-rc NESTED_BLOCK_DEPTH=5</span><br><span class="line">-rc LONG_LINE=200 </span><br><span class="line">-rc NCSS_METHOD=50</span><br><span class="line">-rc LONG_VARIABLE_NAME=30 </span><br><span class="line">-rc SHORT_VARIABLE_NAME=2</span><br><span class="line">-rc LONG_CLASS=1500</span><br><span class="line">-rc LONG_METHOD=150</span><br><span class="line">-disable-rule ShortVariableName </span><br><span class="line">-max-priority-1=10000 </span><br><span class="line">-max-priority-2=10000 </span><br><span class="line">-max-priority-3=10000 &gt; report.html</span><br></pre></td></tr></table></figure>
-<p>  最终会在根目录生成一个<code>report.html</code>文件，点击打开可查看分析结果，大概是下面这个样子<br>
-<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://s1.ax1x.com/2020/03/19/8yHn8U.md.png"
-                      alt=""
-                ><br>
-  另外上述出现的操作命令为了简便写了一个<a class="link"   target="_blank" rel="noopener" href="https://github.com/shengguangdaren/OCLint.git" >脚本<i class="fas fa-external-link-alt"></i></a>，仅做参考，需要的自取<br>
-  因为我此处只是为了展示，所以创建了一个空项目，并没有写内容，所以分析报告一片空白😂😂😂</p>
-<p>  本篇文章只做OCLint使用的初步介绍，实际上我在安装使用的过程中遇到了很多必然或偶然的坑，另外对于<code>OCLint</code>也并没有做详细的介绍，比如<code>OCLint</code>默认规则的介绍，如何自定义规则，相关套件的作用，以及<code>OCLint</code>的缺点等等，随后有时间我会一一整理补充上来。嗯，就酱~</p>
+<h4 id="ARP协议"><a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/ARP/609343?fr=aladdin" >ARP协议<i class="fas fa-external-link-alt"></i></a></h4>
+<p>工作过程<br>
+主机A的IP地址为192.168.1.1，MAC地址为0A-11-22-33-44-01；<br>
+主机B的IP地址为192.168.1.2，MAC地址为0A-11-22-33-44-02；<br>
+当主机A要与主机B通信时，地址解析协议可以将主机B的IP地址（192.168.1.2）解析成主机B的MAC地址，以下为工作流程：</p>
+<ol>
+<li>根据主机A上的路由表内容，IP确定用于访问主机B的转发IP地址是192.168.1.2。然后A主机在自己的本地ARP缓存中检查主机B的匹配MAC地址。</li>
+<li>如果主机A在ARP缓存中没有找到映射，它将询问192.168.1.2的硬件地址，从而将ARP请求帧广播到本地网络上的所有主机。源主机A的IP地址和MAC地址都包括在ARP请求中。本地网络上的每台主机都接收到ARP请求并且检查是否与自己的IP地址匹配。如果主机发现请求的IP地址与自己的IP地址不匹配，它将丢弃ARP请求。</li>
+<li>主机B确定ARP请求中的IP地址与自己的IP地址匹配，则将主机A的IP地址和MAC地址映射添加到本地ARP缓存中。</li>
+<li>主机B将包含其MAC地址的ARP回复消息直接发送回主机A。</li>
+<li>当主机A收到从主机B发来的ARP回复消息时，会用主机B的IP和MAC地址映射更新ARP缓存。本机缓存是有生存期的，生存期结束后，将再次重复上面的过程。主机B的MAC地址一旦确定，主机A就能向主机B发送IP通信了。</li>
+</ol>
+<p>如果目标MAC地址全是F则表示这是一个广播</p>
+<h4 id="ICMP协议"><a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/ICMP/572452?fr=aladdin" >ICMP协议<i class="fas fa-external-link-alt"></i></a></h4>
+<p>ICMP是“Internet Control Message Protocol”（Internet控制消息协议）的缩写。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。<br>
+ICMP唯一的功能是报告问题而不是纠正错误，纠正错误的任务由发送方完成。<br>
+<strong>ping命令使用的就是ICMP协议</strong></p>
 
         </div>
 
@@ -288,11 +325,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：OCLint静态代码校验初探</li>
+        <li>本文标题：重学网络(一)</li>
         <li>本文作者：Lazyloading</li>
-        <li>创建时间：2019-08-19 21:04:41</li>
+        <li>创建时间：2022-05-23 17:42:14</li>
         <li>
-            本文链接：https://lazy.wiki/posts/7dc3b748/
+            本文链接：https://lazy.wiki/posts/49b8739d/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -307,7 +344,11 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/OCLint/">#OCLint</a>&nbsp;
+                        <a href="/tags/%E9%87%8D%E5%AD%A6%E5%BC%80%E5%8F%91/">#重学开发</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C/">#网络</a>&nbsp;
                     </li>
                 
             </ul>
@@ -316,29 +357,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/posts/fc63e88/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">《你是我兄弟》台词摘录</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/posts/fcb7297c/"
+                           href="/posts/6a6dcc9e/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Pod库创建流程（下）</span>
+                                <span class="post-nav-title-item">疫情于我</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -460,7 +486,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">OCLint静态代码校验初探</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">OCLint的目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E8%83%BD%E6%A3%80%E6%B5%8B%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">OCLint能检测哪些问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E5%AE%89%E8%A3%85"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">OCLint安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OCLint%E4%BD%BF%E7%94%A8"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">OCLint使用</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">计算机通信基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">连接方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BA%BF%E7%9B%B4%E8%BF%9E"><span class="nav-number">2.1.</span> <span class="nav-text">网线直连</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E8%BD%B4%E7%94%B5%E7%BC%86"><span class="nav-number">2.2.</span> <span class="nav-text">同轴电缆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E7%BA%BF%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">集线器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E6%A1%A5"><span class="nav-number">2.4.</span> <span class="nav-text">网桥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">2.5.</span> <span class="nav-text">交换机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">2.6.</span> <span class="nav-text">路由器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.1.</span> <span class="nav-text">ARP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ICMP%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.2.</span> <span class="nav-text">ICMP协议</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
