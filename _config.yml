@@ -143,3 +143,4 @@ search:
   content: true
   format: striptags
 
+all_minifier: true
