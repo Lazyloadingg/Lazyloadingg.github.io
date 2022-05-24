@@ -2126,6 +2126,8 @@ pre .javascript .function {
 .page-template-container .friends-link-container .friends-link-list .friends-link-item .content .radius {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 .page-template-container .friends-link-container .friends-link-list .friends-link-item .content .avatar {
   position: absolute;
