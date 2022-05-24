@@ -9,7 +9,7 @@
     
     <title>
         
-            疫情于我 |
+            重学网络(2)-IP分类,网段确定 |
         
         Lazyloading
     </title>
@@ -171,7 +171,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">疫情于我</span>
+            <span class="title-hover-animation">重学网络(2)-IP分类,网段确定</span>
         </div>
 
         
@@ -190,8 +190,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-05-22 18:22:14</span>
-        <span class="mobile">2022-05-22 18:22</span>
+        <span class="pc">2022-05-24 21:01:56</span>
+        <span class="mobile">2022-05-24 21:01</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -199,7 +199,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>&nbsp;
+                        <a href="/categories/%E5%BC%80%E5%8F%91/">开发</a>&nbsp;
                     </li>
                 
             </ul>
@@ -211,7 +211,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E7%96%AB%E6%83%85/">疫情</a>&nbsp;
+                        <a href="/tags/%E9%87%8D%E5%AD%A6%E5%BC%80%E5%8F%91/">重学开发</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>&nbsp;
                     </li>
                 
             </ul>
@@ -221,12 +225,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>3.4k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>11 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
         </span>
     
     
@@ -238,39 +242,145 @@
         
 
         <div class="article-content markdown-body">
-            <p>受疫情影响，截止到今天，我已经居家办公59天，足不出户封闭52天，这将近两个月的是将，我的心态不断变化，甚至可能影响以后的我。</p>
-<h3 id="天真">天真</h3>
-<p>其实在我没有开始居家办公的时候，疫情已经小规模扩散开了，我记得通知居家办公前几天，我们公司还有一位同事不幸确诊，当时我们也是人心惶惶，心里边多少有点害怕，不过因为不在同一个楼层，并且在他确诊前后也没有来过我们楼层，所以虽然害怕，但是也相信政府和公司，并没有太多担心。<br>
-在真正通知居家办公时，只有浦东，徐汇等区比较严重，我所在的区还好，起码那几天出门，交通都没有限制，不过按照当时的趋势，我也明白我们封闭也只是时间问题，所以那几天我就尽量每天出门买菜，说实话，那几天买菜明显感觉到菜价比平时贵了许多，娃娃菜，生菜等常吃的都涨到了七八块，青椒将近十块，而本来已经降价的猪肉也重新涨到了20+，但是即使贵也要买，心想就这一段，过去了就好了，但后来铺天盖地的负面事实证明，我太天真了。</p>
-<h3 id="食物">食物</h3>
-<p>大概是三月底二十七八号左右吧，正式通知要足不出户居家隔离，以黄浦江为界，浦西开始时间从四月一号开始，到四月五号，我就在浦西，当时我是真的相信到四月五号会结束封闭，我还劝我女朋友，魔都毕竟是魔都，不用太过担心，这时候其实我储备了大约一周的食物，都是提前买的，包括菜油大米之类的，但事实证明我确实对上海抱有了过分的信心。<br>
-第一天小区还发了物资，我之前就听说上海政府会在隔离期间发放物资，但是我收到的第一次物资实在是一言难尽，当时我就想，除非实在没有吃的，否则绝不动用这次的物资，<br>
+            <p>由于本系列是我个人在疫情期间心态的变化而重新学习网络后的总结，因此许多细节我并不会详细解释，默认读者已经知道，比如此处IP是什么东西，在OSI的第几层等内容，不过有些地方我会给出相应的解释链接</p>
+<h1><a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/IP%E5%9C%B0%E5%9D%80/150859?fr=aladdin" >IP地址(Internet Protocol Address)<i class="fas fa-external-link-alt"></i></a></h1>
+<ul>
+<li>IPv4：32位，4字节表示（2019年1月25日全球可用IP地址已用完）</li>
+<li>IPv6：128位，16字节</li>
+</ul>
+<p>我们这里先介绍IPv4</p>
+<h2 id="IPv4">IPv4</h2>
+<ul>
+<li>按字节分四部分组成，每部分1个字节，也就是8位，但是直接显示二进制不便于读写，所以一般我们转成十进制表示<br>
 <img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205221649723.jpg"
-                      alt="第一次物资"
+                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205241654289.png"
+                      alt=""
                 ><br>
-四月五号，并没有解封，但这时候，菜市场已经关闭，美团买菜，盒马，叮咚买菜也都被关闭，我终于意识到，网上流传的，在家没有吃的等死的事情，真的会发生，后续的事情大家也都知道，各个区都开始有倒卖物资，高价团购，以物易物等，后续又发放了四五次物资，都很不错，我也很感谢社区，感谢伸出援手的企业</p>
-<p>整体来看，直到现在，疫情在家两个月，虽然瘦了十斤左右，但是在有团购和物资的情况下，我并没有感觉自己被饿到。</p>
-<h3 id="医疗">医疗</h3>
-<p>这还不止，吃只是一方面，要知道疫情下社会停摆的影响是巨大的，医疗资源挤兑严重，大部分的医疗资源都被调去优先处理解决疫情，那么其他患者获得的医疗资源就会减少，甚至是没有，果然，没过几天，网上开始爆出各种，化疗无法就医，孕妇无法就医，其他病症就医因不能出具有效核酸证明而被拒之门外导致耽误最佳治疗时间，加重了病情甚至死亡，著名经济学家郎咸平的母亲也收到了影响，真的是应了那句话，时代的一粒灰，落在一个家庭，一个人身上就是一座山。</p>
-<p>为了尽快结束疫情，核酸检测一次接一次，但中间有个插曲让我觉得无法理解，我们楼上有邻居确诊被拉去方舱，可是作为同一栋楼的我们，居然在三天后才知道这件事，这中间我们还每天下楼丢垃圾，知道这件事情后我们非常气愤，询问为什么居委不告知我们?同一栋楼的我们不更应该知道，然后做好防护措施吗？而这时候的居委就像消失了一样，群里@也毫无反应，不过还好，最后大家都没事，但是你以为就这么结束了吗？并没有。</p>
-<p>自从楼栋出现确诊后，本来几天做一次的核酸检测也停了，注意停的只是我们，到了检测日期，其他楼栋都是正常检测， 唯独将我们楼忽略了，询问居委，得到的回答是，大白从上午工作到下午两三点累了，改天再做。我？？？，我们50号楼，旁边的49号，51号都做了我们就在他们中间没有做是因为大白累了？？？这时候我们其实根本不相信他的说辞，大家都开始猜测，是不是因为楼上有确诊，害怕我们也有感染处于潜伏期，下楼做核酸再感染其他人，但是这种情况的我们不是更应该做检测？如果不能下楼去做，检测最后大白上门做总可以吧？既然检测力度这么大，甚至将其他的医疗资源都优先用于新冠疫情，做到这点不是更应该？总之这件事让我无法理解。</p>
-<p>这中间有件事也让我彻底吓坏了，但是又只能强作镇定，我女朋友突然发烧了，最高到38.4，明明中午吃饭时候还好好的没问题，下午三点钟就开始觉得不舒服，量了下体温37.6，我让她吃了点社区发放的连花清瘟，因为家里没有其他的退烧药，只有这个写的有退烧功效，但事实证明并没有什么卵用，吃过药后过了一个半小时再次量体温，烧的更严重了，我开始在群里询问哪位邻居家有药，很幸运邻居们都很有爱，纷纷说自己家里有你可以过来拿，于是我去了最先回答的那位邻居家，他们给的是布洛芬，不过是小孩子吃的那种，但据他说他之前吃过有效，回去立马让我女朋友吃了点后让他睡下，到了奖金八点，再次量体温，降下来了点，但是仍然在37度多点，这时候我看距离上次吃药已经过了将近四个小时，于是又让她吃了点睡下。</p>
-<p>第二天早上起床后就立马量体温，还是37度，不过我已经不像昨晚那么担心了，后续又发生了很多事，有其他邻居给了头孢，居委打电话询问病情，本计划的全员核酸也不让我们去做了，最后还是以为热心的大白上门给我女朋友做了核酸，她在前一天还送了退烧贴给我们，我真的很感谢她，后来本以为没事了，谁想到提问重新升到了38左右，这时候我是真的有点恐慌了，但是如果我表现的很明显的话只会让情况更糟，所以只能故作镇定，我开始联系大白和居委如何才能去医院，而邻居也开始不断的说让我们去医院，我明白，这时候发烧，不是一个人的事情，其实邻居们也还怕，但是我没想到我女朋友会抗拒，好说歹说就是不愿去医院，我很无奈甚至有点生气，在外邻居们在非议，当然他们也是出于好心我并不怪罪他们，反而感谢他们伸出援手，在内还要被女朋友怪罪说把病情发在群里，说实话我那时候确实有点生气，但是忍了下来，我说到中午，如果体温还起伏的话，别再说别的，去医院，这次他终于答应，很幸运，中午的体温正常了，后边每隔一个小时都量一次体温，直到晚上都没有异常，此时我悬着的心终于放了下来，哎。</p>
-<h3 id="工作">工作</h3>
-<p>由于工作性质的原因，虽然居家办公，但其实对工作效率的影响并不大，依然是每天晨会沟通工作计划，视频会议沟通各种需求，技术方案，随后开发，测试等等。一切有条不紊的推进。</p>
-<p>但是大概在居家二十多天，将近一个月后，我开始变得有点烦躁，开始怀念去公司上班的日子，因为我发现居家办公久了之后，很容易被其他事情分散注意力，很难专注在工作上，对于不太复杂的任务还好，相对复杂一点的任务这种状态是不可取的，我询问了朋友和同事，发现他们都有这种感受，我不知道这是错觉，还是因为隔离久了后情绪发生的莫名的变化</p>
-<h3 id="学习">学习</h3>
-<p>有更多的在家时间，也意味着有更多的时间可以放在工作之外，比如游戏，音乐，社交软件等等，但是同样在一段时间后，突然有那么些瞬间，觉得这些都无关紧要，也可能是因为每天都吃自己爱吃的菜同样会腻的原因；这中间的一天我无意中打开脉脉，突然认识到一件事，疫情导致社会的停摆，怎么可能只影响到吃喝与医疗？看看脉脉不断有人哀叹失业，哀叹工作难找就明白了，疫情的影响是方方面面的！</p>
-<p>我终于开始关注之前被我不自觉忽略的新闻，就业形势，大厂裁员，季度GDP大幅下降，这让我恐慌，恐慌情绪支配下的我，对于什么游戏，社交，更加失去兴趣，我开始想，我如果被毕业了怎么办，我如果被社会淘汰了怎么办？我的房租，房贷，吃穿用度怎么办？这让我非常焦虑，好几个夜晚，躺在床上都在想这些事情，特别是看到我那小傻瓜一样的女朋友每天就是看看韩剧，看看综艺，刷刷微博，看看吃播我就更无语，我心想，你难道从来不担心这些的吗？万一我失业了交不起房租，我们住哪？万一将来找不到工作，房贷逾期怎么办？</p>
-<p>连续几天我被这种焦虑情绪支配，我知道我不能一直这样，我开始想办法摆脱这种困境，于是我开始看书，开始看技术文章，开始学习，其实我一直有在学习，但之前的纯属于兴趣使然，从没有像这样担心将来到焦虑，逼着自己去学习。</p>
-<p>连续一周不停的学习，白天有空就看文章，晚上吃了饭就开始敲代码验证想法，甚至关了灯躺在床上还在想，这么问题怎么解决？事后来看，那几天的我简直魔怔了，魔怔到有点好笑，虽然现在我学习的强度比前一段有所下降，但是依然保持每天学习从不拉下，而就这么持续了一二十天后，我发现这中间我完全没想起来去玩游戏，是真的没想起来，就想他们本身就不存在一样，而这种状态下得我感到了一种格外的充实和安全感。</p>
-<p>而这中间我也认识到了很多的不足，所以暂时有个想法，我想重新开始学习开发，从那些最基础的，最简单的东西开始，把自己当成一个初出校门的小白，重新认识自己这个行业。</p>
-<p>再后来，我不满足于看电子书，看技术文章，看源码，看视频，我翻出了吃灰许久的实体书籍，开始得空就在阳台坐着翻看，安静的傍晚，或是夜幕降临后，坐在沙发上，一个人看着书，偶尔抬头望向我那小傻子一样又在看不知道什么综艺的女朋友，我觉得，可能现在的我想太多只会让自己变得更加沮丧，在疫情下无法出门，社会停摆，无论什么想太多都是一种负担，不如趁这段时间提升自己，不是有那句话吗，你若盛开，蝴蝶自来。</p>
-<h3 id="最后">最后</h3>
-<p>啰嗦了这么多，都不知道自己在说些什么了，在家这两个月还发生了许多事情，有好的，有坏的，很多都没有在这里写出来，有关于个人的，有关于这座城市的，但是这两个月下来我的心态确实发生了变化，对工作，对生活，对学习，或许这种心态会影响我一生，或许是一阵，这知道呢，不过我清楚的是，无论影响多久，这都是我，我走过的路，我经历过的好的，坏的，所有事情，构成了现在的我，用一句话来说就是，我与我周旋久，宁做我。</p>
+按功能分两部分网络标识（网络ID）和主机标识（主机ID）<br>
+同一网段网络ID相同，</li>
+</ul>
+<h3 id="子网掩码（subnet-mask">子网掩码（subnet mask)</h3>
+<p>网段通过子网掩码计算，通过<code>子网掩码 &amp; IP地址</code>计算网段,举例:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">IP地址：192.168.1.10</span><br><span class="line">子网掩码：255.255.255.0</span><br><span class="line">-----------------------</span><br><span class="line">  1100 0000.1010 1000.0000 0001.0000 0000  -&gt; IP地址（二进制）</span><br><span class="line">&amp; 1111 1111.1111 1111.1111 1111.0000 0000  -&gt; 子网掩码（二进制）</span><br><span class="line">-------------------------------------------</span><br><span class="line">  1100 0000.1010 1000.0000 0001.0000 0000  -&gt; 网段（二进制）</span><br><span class="line">  192.168.1.0                              -&gt; 网段(十进制)</span><br><span class="line">  所以，这个例子中的192.168.1.0就是网段（网络ID），而最后一位就用来表示主机（主机ID）</span><br></pre></td></tr></table></figure>
+<p>不能直接把IP地址的前三部分当做网段，网段必须是通过<code>子网掩码 &amp; IP地址</code>来计算，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IP地址：130.168.1.10</span><br><span class="line">子网掩码：255.255.0.0</span><br><span class="line">网段：130.168.0.0 -&gt; 最后两位表示主机，主机位要从1开始</span><br></pre></td></tr></table></figure>
+<p>一个地址主机位全0就代表这是一个网段，主机位全255就表示这是个广播IP，给这个IP发消息就是给这个网段的所有主机发消息</p>
+<h3 id="地址分类">地址分类</h3>
+<p>那么到底怎么确定网段呢？IP地址其实有分类，不同类别的IP地址网络标识部分长度不同，也就是网段部分长度也就不同，同样的主机位长度也不同，那么不同类别的IP地址网段内容纳的主机数也就不同</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205241659036.png"
+                      alt="地址分类"
+                ></p>
+<p>比如A类地址由8位网络ID和24位主机ID组成，举例<code>1.168.1.1</code>，子网掩码<code>255.0.0.0</code>，那么网段就是<code>1.0.0.0</code></p>
+<p>主机位长度不同，对应的网段能容纳的主机数也就不同，主机位可以容纳的主机个数就是 <code>主机位最大值-2</code><strong>（因为255为广播地址，0用来表示网段）</strong></p>
+<h4 id="A类地址">A类地址</h4>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205241659568.png"
+                      alt=""
+                ><br>
+因为第一部分8位表示网络ID，并且必须以0开头，那么二进制取值范围就是<code>0000 0000 - 0111 1111</code>转化成十进制就是<code>0-127</code></p>
+<h5 id="网络ID部分">网络ID部分</h5>
+<ul>
+<li>全0不能用</li>
+<li>127位保留网段，我们常用的127.0.0.1是本地环回地址（Lookback）代表本机地址，它不属于任何一个有类别地址类。代表设备的本地虚拟接口，所以默认被看作是永远不会宕掉的接口</li>
+<li>综合上边两条 A类地址网段范围就是<code>1-126</code></li>
+</ul>
+<h5 id="主机ID部分">主机ID部分</h5>
+<ul>
+<li>主机ID部分三字节三部分，每部分取值范围是0-255</li>
+<li>每个A类网络（网段）能容纳的主机数为256 * 256 * 256 -2 = 2^24 - 1 = 16777214（减去255和0）</li>
+</ul>
+<h4 id="B类地址">B类地址</h4>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205241704980.png"
+                      alt=""
+                ><br>
+因为前两部分16位表示网络ID，并且必须以10开头，那么二进制取值范围就是<code>1000 0000 0000 0000 - 1011 1111 1111 1111</code>转化成十进制就是<code>128.0-191.255</code></p>
+<h5 id="网络ID部分-2">网络ID部分</h5>
+<ul>
+<li>第一部分取值范围128-191</li>
+<li>第二部分取值范围0-255</li>
+<li>C类地址网段范围就是<code>128.0-191.255</code></li>
+</ul>
+<h5 id="主机ID部分-2">主机ID部分</h5>
+<ul>
+<li>第三地部分取值范围都是0-255</li>
+<li>每个B类网络（网段）能容纳的主机数为256 * 256 -2 = 2^16 - 2 = 65534</li>
+</ul>
+<h4 id="C类地址">C类地址</h4>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205241659590.png"
+                      alt=""
+                ><br>
+因为前三部分24位表示网络ID，并且必须以110开头，那么二进制取值范围就是<code>1100 0000 0000 0000 0000 0000 - 1101 1111 1111 1111 1111 1111</code>转化成十进制就是<code>192.0.0-223.255.255</code></p>
+<h5 id="网络ID部分-3">网络ID部分</h5>
+<ul>
+<li>第一部分取值范围192-223</li>
+<li>第二,三部分取值范围0-255</li>
+<li>C类地址网段范围就是<code>192.0.0-223.255.255</code></li>
+</ul>
+<h5 id="主机ID部分-3">主机ID部分</h5>
+<ul>
+<li>第四地部分取值范围都是0-255</li>
+<li>每个C类网络（网段）能容纳的主机数为256 - 2 = 254</li>
+</ul>
+<h4 id="D-E类地址">D,E类地址</h4>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Lazyloadingg/img-blog/master/img/202205241659604.png"
+                      alt=""
+                ></p>
+<p>那么我们其实可以快速的通过一个IP地址的第一部分来判断它属于什么类型进而确定网段范围和主机范围</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">第一部分</th>
+<th style="text-align:center">类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0~127</td>
+<td style="text-align:center">A类</td>
+</tr>
+<tr>
+<td style="text-align:center">128~191</td>
+<td style="text-align:center">B类</td>
+</tr>
+<tr>
+<td style="text-align:center">192~223</td>
+<td style="text-align:center">C类</td>
+</tr>
+<tr>
+<td style="text-align:center">224~239</td>
+<td style="text-align:center">D类</td>
+</tr>
+<tr>
+<td style="text-align:center">240~255</td>
+<td style="text-align:center">E类</td>
+</tr>
+</tbody>
+</table>
+<p>比如看到一个IP<code>110.110.110.110</code>通过第一部分立马能判断吃它是A类地址</p>
+<h4 id="子网掩码CIDR表示法">子网掩码CIDR表示法</h4>
+<p>为了方便的表示IP和子网掩码，它们也可以写在一起，像下边这样</p>
+<ul>
+<li>192.168.1.100/24,代表IP为<code>192.168.1.100</code>,子网掩码是<code>24个二进制1</code>也就是<code>255.255.255.0</code></li>
+<li>191.100.1.100/16,代表IP为<code>191.100.1.100</code>,子网掩码是<code>16个二进制1</code>也就是<code>255.255.0.0</code></li>
+</ul>
+<hr>
+<p><a href="https://lazy.wiki/posts/49b8739d/">重学网络（一）网络通讯的基础</a></p>
 
         </div>
 
@@ -278,11 +388,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：疫情于我</li>
+        <li>本文标题：重学网络(2)-IP分类,网段确定</li>
         <li>本文作者：Lazyloading</li>
-        <li>创建时间：2022-05-22 18:22:14</li>
+        <li>创建时间：2022-05-24 21:01:56</li>
         <li>
-            本文链接：https://lazy.wiki/posts/6a6dcc9e/
+            本文链接：https://lazy.wiki/posts/4947d79c/
         </li>
         <li>
             版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -297,7 +407,11 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/%E7%96%AB%E6%83%85/">#疫情</a>&nbsp;
+                        <a href="/tags/%E9%87%8D%E5%AD%A6%E5%BC%80%E5%8F%91/">#重学开发</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C/">#网络</a>&nbsp;
                     </li>
                 
             </ul>
@@ -306,29 +420,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/posts/49b8739d/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">重学网络（一）网络通讯的基础</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/posts/a696ae61/"
+                           href="/posts/49b8739d/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">load和initialize区别</span>
+                                <span class="post-nav-title-item">重学网络（一）网络通讯的基础</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -450,7 +549,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A9%E7%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">天真</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%9F%E7%89%A9"><span class="nav-number">2.</span> <span class="nav-text">食物</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BB%E7%96%97"><span class="nav-number">3.</span> <span class="nav-text">医疗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0"><span class="nav-number">5.</span> <span class="nav-text">学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">IP地址(Internet Protocol Address)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IPv4"><span class="nav-number">1.1.</span> <span class="nav-text">IPv4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%EF%BC%88subnet-mask"><span class="nav-number">1.1.1.</span> <span class="nav-text">子网掩码（subnet mask)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">地址分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">A类地址</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E7%BB%9CID%E9%83%A8%E5%88%86"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">网络ID部分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BAID%E9%83%A8%E5%88%86"><span class="nav-number">1.1.2.1.2.</span> <span class="nav-text">主机ID部分</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">B类地址</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E7%BB%9CID%E9%83%A8%E5%88%86-2"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">网络ID部分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BAID%E9%83%A8%E5%88%86-2"><span class="nav-number">1.1.2.2.2.</span> <span class="nav-text">主机ID部分</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">C类地址</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E7%BB%9CID%E9%83%A8%E5%88%86-3"><span class="nav-number">1.1.2.3.1.</span> <span class="nav-text">网络ID部分</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BAID%E9%83%A8%E5%88%86-3"><span class="nav-number">1.1.2.3.2.</span> <span class="nav-text">主机ID部分</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-E%E7%B1%BB%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">D,E类地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81CIDR%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">子网掩码CIDR表示法</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>

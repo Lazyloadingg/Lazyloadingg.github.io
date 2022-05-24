@@ -9,7 +9,7 @@
     
     <title>
         
-            重学网络(一) |
+            重学网络（一）网络通讯的基础 |
         
         Lazyloading
     </title>
@@ -171,7 +171,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">重学网络(一)</span>
+            <span class="title-hover-animation">重学网络（一）网络通讯的基础</span>
         </div>
 
         
@@ -225,12 +225,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.5k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>6 分钟</span>
         </span>
     
     
@@ -296,10 +296,20 @@
 <li>网关收到数据包后，通过目标网段对应的网关，发送ARP广播到对应网段获取目标MAC地址</li>
 <li>目标设备收到数据后，回传数据给源设备完成跨网段通信</li>
 </ol>
+<h3 id="MAC地址">MAC地址</h3>
+<p>每个网卡都有一个全球唯一的MAC地址，固化在网卡硬件上，它由6字节也就是48位标识，前三字节由IEEE（注册管理机构）分配给厂商，后三字节厂商自行分配，<a class="link"   target="_blank" rel="noopener" href="https://standards-oui.ieee.org/oui/oui.txt" >查看地址<i class="fas fa-external-link-alt"></i></a><br>
+MAC地址一般长这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8A-7B-6C-01-23-45(Windows)</span><br><span class="line">或</span><br><span class="line">8A:7B:6C:01:23:45(MacOS)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>MAC地址可以修改（网卡硬件的不能修改，但是我们可以给电脑设置一个虚拟的MAC地址，这样系统就会使用设置的这个MAC地址，而不是网卡本身的MAC地址）</li>
+<li>有时因为交换机等的人为配置的限制，不在允许范围内的MAC地址的设备不能上网，那么我们可以拿到允许上网设备的MAC地址，将自己的进行修改，来进行蹭网，但是同一个网段有两台设备具有相同的MAC地址，同时间其中一台设备是不能上网的</li>
+<li>通信过的设备会缓存目标的IP和MAC地址的映射关系<code>arp -a</code>查看</li>
+<li>如果A设备的网卡换了，而其他设备缓存的有A设备的IP和MAC地址，这时候再向A通信会失败，这时候会重新发送ARP广播获取新的MAC地址</li>
+<li>也可以手动给设备添加IP和MAC的映射关系<code>arp -s IP地址 MAC地址</code></li>
+</ul>
 <h3 id="补充">补充</h3>
 <ul>
 <li>同一个网段，代表在同一个广播域，代表可以收到同样的ARP广播</li>
-<li>每个网卡都有一个全球唯一的MAC地址，固化在网卡硬件上，它由6字节也就是48位标识，前三字节由IEEE（注册管理机构）分配给厂商，后三字节厂商自行分配，<a class="link"   target="_blank" rel="noopener" href="https://standards-oui.ieee.org/oui/oui.txt" >查看地址<i class="fas fa-external-link-alt"></i></a></li>
 </ul>
 <h4 id="ARP协议"><a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/ARP/609343?fr=aladdin" >ARP协议<i class="fas fa-external-link-alt"></i></a></h4>
 <p>工作过程<br>
@@ -325,7 +335,7 @@ ICMP唯一的功能是报告问题而不是纠正错误，纠正错误的任务�
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>本文标题：重学网络(一)</li>
+        <li>本文标题：重学网络（一）网络通讯的基础</li>
         <li>本文作者：Lazyloading</li>
         <li>创建时间：2022-05-23 17:42:14</li>
         <li>
@@ -356,6 +366,21 @@ ICMP唯一的功能是报告问题而不是纠正错误，纠正错误的任务�
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/posts/4947d79c/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">重学网络(2)-IP分类,网段确定</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -486,7 +511,7 @@ ICMP唯一的功能是报告问题而不是纠正错误，纠正错误的任务�
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">计算机通信基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">连接方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BA%BF%E7%9B%B4%E8%BF%9E"><span class="nav-number">2.1.</span> <span class="nav-text">网线直连</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E8%BD%B4%E7%94%B5%E7%BC%86"><span class="nav-number">2.2.</span> <span class="nav-text">同轴电缆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E7%BA%BF%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">集线器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E6%A1%A5"><span class="nav-number">2.4.</span> <span class="nav-text">网桥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">2.5.</span> <span class="nav-text">交换机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">2.6.</span> <span class="nav-text">路由器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.1.</span> <span class="nav-text">ARP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ICMP%E5%8D%8F%E8%AE%AE"><span class="nav-number">3.2.</span> <span class="nav-text">ICMP协议</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E4%BF%A1%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">计算机通信基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">连接方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BA%BF%E7%9B%B4%E8%BF%9E"><span class="nav-number">2.1.</span> <span class="nav-text">网线直连</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E8%BD%B4%E7%94%B5%E7%BC%86"><span class="nav-number">2.2.</span> <span class="nav-text">同轴电缆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E7%BA%BF%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">集线器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E6%A1%A5"><span class="nav-number">2.4.</span> <span class="nav-text">网桥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-number">2.5.</span> <span class="nav-text">交换机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="nav-number">2.6.</span> <span class="nav-text">路由器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC%E5%9C%B0%E5%9D%80"><span class="nav-number">3.</span> <span class="nav-text">MAC地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">4.</span> <span class="nav-text">补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.1.</span> <span class="nav-text">ARP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ICMP%E5%8D%8F%E8%AE%AE"><span class="nav-number">4.2.</span> <span class="nav-text">ICMP协议</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
