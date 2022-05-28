@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lazy.wiki/posts/4947d79c/</loc>
+    
+    <lastmod>2022-05-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://lazy.wiki/posts/bdfeed9c/</loc>
     
     <lastmod>2022-05-28</lastmod>
@@ -10,13 +17,6 @@
   
   <url>
     <loc>https://lazy.wiki/posts/a3a7c4e/</loc>
-    
-    <lastmod>2022-05-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://lazy.wiki/posts/4947d79c/</loc>
     
     <lastmod>2022-05-28</lastmod>
     
@@ -186,13 +186,6 @@
   </url>
   
   <url>
-    <loc>https://lazy.wiki/tags/OCLint/</loc>
-    <lastmod>2022-05-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://lazy.wiki/tags/Cocoapods/</loc>
     <lastmod>2022-05-28</lastmod>
     <changefreq>daily</changefreq>
@@ -215,6 +208,13 @@
   
   <url>
     <loc>https://lazy.wiki/tags/iOS/</loc>
+    <lastmod>2022-05-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lazy.wiki/tags/OCLint/</loc>
     <lastmod>2022-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
