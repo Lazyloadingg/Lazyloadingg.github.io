@@ -24,7 +24,7 @@
     KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#003366","avatar":"/images/favicon.jpg","favicon":"/images/favicon.jpg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"我与我周旋久，宁做我......"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
   </script>
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Lazyloading的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Lazyloading的博客" type="application/atom+xml">
 </head>
 
 
@@ -265,7 +265,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.3.0</span><br></pre></td></tr></table></figure>
 <h4 id="OCLint使用">OCLint使用</h4>
 <p>   OCLint作为静态代码检测工具是可以直接在<code>Xcode</code>中使用的，也可以在终端进行操作，本文介绍的是终端操作方式，<code>Xcode</code>使用后续补充；首先进入项目根目录执行如下命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild clean </span><br><span class="line">xcodebuild analyze | tee xcodebuild.log </span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild clean </span><br><span class="line">xcodebuild analyze | <span class="built_in">tee</span> xcodebuild.log </span><br></pre></td></tr></table></figure>
 <p>  这一步会对项目进行分析并会在根目录生成一个<code>build</code>目录，并将分析日志输出在<code>xcodebuild.log</code>文件中</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcodebuild |xcpretty -r json-compilation-database -o compile_commands.json </span><br></pre></td></tr></table></figure>
 <p>  这一步是将编译结果输出在<code>compile_commands.json</code>文件中,这里有一个点要注意的就是，如果你已经编译过并将结果输出在<code>compile_commands.json</code>中，那么再次编译时已编译过的内容是不会被覆盖的，如果希望每次都重头操作，那么可以使用<code>xcodebuild clean</code>命令清除缓存，这也是第一步执行此命令的原因。</p>
