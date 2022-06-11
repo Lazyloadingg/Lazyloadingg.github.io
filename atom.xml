@@ -6,7 +6,7 @@
   <link href="https://lazy.wiki/atom.xml" rel="self"/>
   
   <link href="https://lazy.wiki/"/>
-  <updated>2022-06-03T02:52:14.235Z</updated>
+  <updated>2022-06-11T05:17:42.949Z</updated>
   <id>https://lazy.wiki/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>年华虚度</title>
+    <link href="https://lazy.wiki/posts/12c49338/"/>
+    <id>https://lazy.wiki/posts/12c49338/</id>
+    <published>2022-06-11T05:15:55.000Z</published>
+    <updated>2022-06-11T05:17:42.949Z</updated>
+    
+    <content type="html"><![CDATA[<p>总会在某个瞬间，有种年华虚度的感觉；</p><p>当看到弟弟妹妹，当看到身边比自己年轻的人，当把同样年纪的自己和现在的他们进行比较，总觉得，这么多年其实错过了很多东西，或者说放弃了很多东西。</p><p>特别是工作后，我相信很多人都会在工作后后悔当初学习不够努力，感慨一句为什么当初没人xx我学习之类的，这是在遭受社会毒打后才会发出感慨，我曾经以我的经历，一个作为过来人的经验去劝诫我妹妹，学习更努力一点，但同样的，我从学生时代走过来，也深知在那个时代，对于家长，对于老师的看法，也明白那个时代年轻人心理的一些想法，虽然不会完全相同，但是总体来看是一样，所以我在劝诫她努力学习的同时，并没有苛求，因为这不是必选项，我会告诉她，未来的生活是你自己的，我和咱妈不是陪你到最后的人，将来你结婚了，你的丈夫，你的子女，也不是陪你到最后的人，陪你到最后的人，只有你自己，每个人都是如此，所以，你的人生会如何，最终要看你自己的选择，而学习，是能够给你提供简单选项的一种方案，或者说，学习相对于不学习，努力相对于不努力，将来对于你的生活，可选项会多一些。</p><p>可是我也明白，她大体是听不进去的，因为能够说出这番话的人，一定是经历了某些事情，身体和心理，都感受到了些什么，才能变成曾经的自己不屑搭理的那种人，毕竟在我年轻的时候，也有长辈劝诫过我。</p><p>疫情不断反复，也让我心情起起伏伏，这期间我也看到了很多不足，所以才会有开篇的感慨，仿佛这么多年来，自己什么也没有做，虽然重新捡起学习，充实自己甚至到连续一周没打开游戏都没发觉，可坐下来想想还是不甘心。</p><p>人们常说，要做一件事情，最好的开始时间就是现在，是啊，这句话没错，但是我却不完全认同，我觉得这是一种站在事后去看待问题退而求其次的角度，你想想看，虽然说什么时候开始都可以，可人的生命总是有限的，也就是说，我们能够在一生中做的事情是有限的，并且必须在一个时间段内，如果到时间了还没完成，对不起，你没机会了。</p><p>那么假设一件事按普通人的方式来做要20年的话，你从20岁开始，和虚度20年后从40岁开始，是完全不同的情况，如果假设一个人的寿命是80岁，那么前者做完后才40岁，还有40年时间可以做其他事情，后者做完已经60岁只剩下20年已是日薄西山垂垂老矣，你还有多少精力能做自己想做的事情？这还不说20岁和40岁所面临的的生活状况还不同效率也不同，20岁你可能无所顾忌，40岁就要考虑妻儿老母。</p><p>所以我时常后悔，后悔之后总想有什么办法能够弥补，能够找回那些已经逝去的时光，能够去做些更有意义的事情，即使自己已经行动起来，仍然抹除不了心里的那点悔恨和遗憾。</p><p>可能人类就是如此，有人称之为贪婪，总想完成所有自己想做到事情，总想拥有想要的一切，但实际上这是不可能的。</p><p>可是也总有些人想试一试能不能做得到，做到在自己的最后时刻，回顾自己的一生，能够没有遗憾，能够安静的离开，我羡慕也佩服这样的人，不自觉的就想起了保尔柯察金。</p><p>得，吃饭了，感谢我家亲爱的能够在我胡思乱想的时候做好午饭把我拉回现实，以后有空继续给大家逼叨传播负能量😂</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;总会在某个瞬间，有种年华虚度的感觉；&lt;/p&gt;
+&lt;p&gt;当看到弟弟妹妹，当看到身边比自己年轻的人，当把同样年纪的自己和现在的他们进行比较，总觉得，这么多年其实错过了很多东西，或者说放弃了很多东西。&lt;/p&gt;
+&lt;p&gt;特别是工作后，我相信很多人都会在工作后后悔当初学习不够努力，感慨一</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="https://lazy.wiki/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="时光匆匆" scheme="https://lazy.wiki/tags/%E6%97%B6%E5%85%89%E5%8C%86%E5%8C%86/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue自定义指令</title>
@@ -521,34 +547,6 @@
  [TOC]
 &lt;h1&gt;创建pod库流程(下)&lt;/h1&gt;
 &lt;p&gt;前边讲了pod库默认工程模板的创建，文件添加存放路径，代码编写位置等基本信息，今天简单说下spec文件的编写及推送。&lt;/p&gt;</summary>
-      
-    
-    
-    
-    <category term="开发" scheme="https://lazy.wiki/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="Cocoapods" scheme="https://lazy.wiki/tags/Cocoapods/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pod库创建流程（上）</title>
-    <link href="https://lazy.wiki/posts/440b4e19/"/>
-    <id>https://lazy.wiki/posts/440b4e19/</id>
-    <published>2019-07-25T02:38:41.000Z</published>
-    <updated>2022-05-21T08:27:14.924Z</updated>
-    
-    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer" /><p>[toc]</p><h1>创建pod库流程(上)</h1><h2 id="第一步">第一步</h2><p>创建本地私有库，<code>pod lib create 为创建pod模板工程命令``DYTest</code>为私有库名称</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod lib create DYTest</span><br></pre></td></tr></table></figure><p>结果如下图所示,命令默认会在当前所在目录下创建，图中所示路径为桌面<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%888.59.05.png"                      alt=""                ></p><h2 id="第二步">第二步</h2><p>创建远程仓库，进入刚才创建的DYTest工程根目录将本地创建的私有库工程与远程仓库关联起来，具体操作如下所示：<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%889.06.37.png"                      alt=""                ></p><h2 id="第三步">第三步</h2><p>创建远程Spec文件仓库并添加到到本地repo目录，repo目录在本地cocoapods安装目录下，Spec文件为pod工程描述文件，里边可编辑pod库的所有配置信息，名称，地址，支持平台，版本，依赖库等等.<br><code>pod repo add</code>为本地pod添加spec文件命令<code>DYTestSpecs</code>为要添加的spec目录的名称<code>http://192.168.120.30/iOS_Group/DYTestSpecs.git</code>为远程Spec文件仓库地址。</p><p><strong>注意：一个Spec文件仓库可以存放多个pod库的Spec文件</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo add DYTestSpecs http://192.168.120.30/iOS_Group/DYTestSpecs.git</span><br></pre></td></tr></table></figure><p>结果如下:<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%889.20.08.png"                      alt=""                ></p><h2 id="第四步">第四步</h2><p>至此我们便可以着手在pod库里进行代码编写工作，由此流程创建的pod库文件根目录结构大概如下图所示：</p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%889.23.20.png"                      alt="屏幕快照 2019-07-25 上午9.23.20"                ></p><p>其中<code>Example</code>文件夹为pod模板自带的示例工程，我们在pod库中编写的代码可通过此示例工程进行调试，<code>DYTest</code>文件夹为我们将要编写代码的物理路径，目录结构如下:</p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%889.26.20.png"                      alt="屏幕快照 2019-07-25 上午9.26.20"                ></p><p><code>Classes</code>文件夹即我们编写的pod库代码所在的文件物理路径</p><p>下面我们打开项目看一下：<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/WeChat865ff9360b497c1dd165b1d7d9f4f6d8.png"                      alt="WeChat865ff9360b497c1dd165b1d7d9f4f6d8"                ></p><p>其中<strong>创建时路径不要选错，是在<code>Classes</code>文件夹下</strong>箭头所指的文件为我们当前pod库的spec文件，将来如果要发布被他人搜索使用就需要编写此spec文件对应信息并将其推送单刚才创建的远程spec仓库<code>DYTestSpecs</code>中。</p><p><strong>绿色</strong>箭头所指为我们的<code>Example</code>示例工程目录。</p><p><strong>红色</strong>箭头所指为我们pod库工程代码目录，<strong>此目录为虚拟文件夹，其下文件物理路径为前文所述的<code>Classes</code>文件夹,一定要注意创建文件时候不要选错存放路径，应该存放在<code>Classes</code>下</strong>。</p><p>每当我们添加新的文件时需要进入<code>Example</code>目录下进行<code>update</code>操作，这样创建的文件会自动加入工程，不进行<code>update</code>操作你的文件在使用时将会提示<code>not found</code>,具体操作如下所示:<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%889.40.28.png"                      alt="屏幕快照 2019-07-25 上午9.40.28"                ></p><p><strong>创建时路径不要选错，是在<code>Classes</code>文件夹下</strong></p><p>下面进行<strong>update</strong>操作<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%8810.24.00.png"                      alt="屏幕快照 2019-07-25 上午10.24.00"                ><br>注意路径，是在<code>Example</code>目录下进行update,完成后我们新创建的文件就可以<code>import</code>使用了</p><p>当一天的工作完成后需要进行代码提交，那么我们进入项目根目录进行代码提交，<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15640160877905/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-25%20%E4%B8%8A%E5%8D%8810.32.10.png"                      alt="屏幕快照 2019-07-25 上午10.32.10"                ></p><p>分支根据情况自行选择，此处我选择master，pod库创建的简单流程及代码编写大体就这样，下次详细说一下spec文件的编写以及pod库某一阶段完成后打tag，进行推送以供他人<code>search``install</code>的流程。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot; /&gt;
-&lt;p&gt;[toc]&lt;/p&gt;
-&lt;h1&gt;创建pod库流程(上)&lt;/h1&gt;
-&lt;h2 id=&quot;第一步&quot;&gt;第一步&lt;/h2&gt;
-&lt;p&gt;创建本地私有库，&lt;code&gt;pod lib create 为创建po</summary>
       
     
     
