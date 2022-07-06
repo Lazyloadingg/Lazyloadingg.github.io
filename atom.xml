@@ -6,7 +6,7 @@
   <link href="https://lazy.wiki/atom.xml" rel="self"/>
   
   <link href="https://lazy.wiki/"/>
-  <updated>2022-06-11T05:17:42.949Z</updated>
+  <updated>2022-07-06T13:10:13.476Z</updated>
   <id>https://lazy.wiki/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS Crash日志符号化</title>
+    <link href="https://lazy.wiki/posts/b98f7fe4/"/>
+    <id>https://lazy.wiki/posts/b98f7fe4/</id>
+    <published>2022-07-06T12:30:20.000Z</published>
+    <updated>2022-07-06T13:10:13.476Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言">前言</h3><p>是这样的，最近面试遇到一个问题，问怎么排查分析crash，说实话做了几年开发，项目中对于crash日志的收集与分析都是用的三方服务，比如bugly，听云之类的，所以一开始听到这个问题不清楚具体在问什么，虽然之前有用过dSYMTools之类的工具分析，不过我印象中还要自己计算函数地址，所以用的很少，当时这个问题就没有回答好，事后研究了下，发现其实并不复杂，所以记录下，废话不多说直接开整</p><h3 id="分析crash信息">分析crash信息</h3><p>当我们程序crash时，堆栈看到的都是函数地址，想要定位具体哪里出了问题非常困难，可以通过调试crash日志获取详细信息<br>分析要准备几个必要文件</p><ol><li>dSYM文件（符号表文件，包含函数，函数地址，文件，行号的映射信息）</li><li>crash文件或ips文件（包含造成crash的具体堆栈，进程信息等）</li><li>symbolicatecrash或CrashSymbolicator文件</li></ol><ul><li>dSYM获取</li></ul><p>需要先在xcode进行配置</p><blockquote><ol><li><code>Build options -&gt; Debug Infomation Format -&gt; DWARF with dSYM File</code></li><li><code>Generate Debug Symbols -&gt; YES</code>这一步有些人会关掉，因为关掉可以减小包体积，所以要注意</li></ol></blockquote><p>之后具体获取</p><blockquote><ol><li>Xcode-&gt;Window-&gt;Organizer -&gt; Archives -&gt; Finder -&gt; 显示包内容 -&gt; dSYMs</li><li>项目目录下 -&gt; Products -&gt; xxx.app -&gt; Finder</li></ol></blockquote><h4 id="Crash文件分析">Crash文件分析</h4><ul><li>crash日志获取</li></ul><blockquote><p>如果手机在身边：xcode -&gt; window -&gt; Devieces and Simulators -&gt; View Device Logs -&gt; export 导出crash文件</p></blockquote><ul><li>symbolicatecrash</li></ul><blockquote><p>进入 <code>/Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash</code><br>如果路径不对，可在终端用<code>find /Applications/Xcode.app -name symbolicatecrash -type f</code>命令查找，获取路径后进入文件夹，copy文件出来</p></blockquote><p>三个文件都获取到后，放入同一个文件夹下，终端进入文件夹，执行如下命令</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./symbolicatecrash xxx.crash xxx.dSYM &gt; xxx.log</span><br></pre></td></tr></table></figure><p>如果遇到报错<code>Error: DEVELOPER_DIR&quot; is not defined at ./symbolicatecrash line 69</code>，就先在终端输入</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</span><br></pre></td></tr></table></figure><p>之后查看log文件<code>Last Exception</code>部分</p><h4 id="ips文件">ips文件</h4><ul><li>ips获取</li></ul><blockquote><p>设置-&gt;隐私-&gt;分析-&gt;分析数据 -&gt; 导出ips文件(将synced后缀改为ips后缀)</p></blockquote><ul><li>CrashSymbolicator</li></ul><blockquote><p>进入<code>/Applications/Xcode.app/Contents/SharedFrameworks/CoreSymbolicationDT.framework/Versions/A/Resources/CrashSymbolicator.py</code></p></blockquote><p>因为CrashSymbolicator.py有其他模块的路径依赖，所以我们不复制文件，直接通过路径执行</p><p>将拿到的dSYM文件和ips文件后放入同一个文件夹下，然后目录下终端执行</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 /Applications/Xcode.app/Contents/SharedFrameworks/CoreSymbolicationDT.framework/Versions/A/Resources/CrashSymbolicator.py -d xxx.dSYM -p xxx.ips -&gt; xxx.json</span><br></pre></td></tr></table></figure><p>之后查看json文件<code>Last Exception</code>，CrashSymbolicator输出的是json格式的数据</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+&lt;p&gt;是这样的，最近面试遇到一个问题，问怎么排查分析crash，说实话做了几年开发，项目中对于crash日志的收集与分析都是用的三方服务，比如bugly，听云之类的，所以一开始听到这个问题不清楚具体在问什么，虽然之前有用过dSYMTools</summary>
+      
+    
+    
+    
+    <category term="开发" scheme="https://lazy.wiki/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="iOS" scheme="https://lazy.wiki/tags/iOS/"/>
+    
+    <category term="GCD" scheme="https://lazy.wiki/tags/GCD/"/>
+    
+    <category term="多线程" scheme="https://lazy.wiki/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>年华虚度</title>
@@ -528,33 +557,6 @@
     
     
     <category term="OCLint" scheme="https://lazy.wiki/tags/OCLint/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pod库创建流程（下）</title>
-    <link href="https://lazy.wiki/posts/fcb7297c/"/>
-    <id>https://lazy.wiki/posts/fcb7297c/</id>
-    <published>2019-07-28T07:41:41.000Z</published>
-    <updated>2022-05-21T08:27:14.925Z</updated>
-    
-    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer" /> [TOC]<h1>创建pod库流程(下)</h1><p>前边讲了pod库默认工程模板的创建，文件添加存放路径，代码编写位置等基本信息，今天简单说下spec文件的编写及推送。</p><h2 id="第一步">第一步</h2><p>首先我们打开pod库的spec文件,以<code>DYTest</code>项目为例：<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8A%E5%8D%8811.55.39.png"                      alt="屏幕快照 2019-07-28 上午11.55.39"                ><br>其中红色箭头所指的就是项目的spec文件，红色方框内就是pod默认的spec文件的内容，里边有很多字段分别对应不同的配置信息，但一般来说我们<strong>只需要</strong>配置其中的几项就可以，其他的可以暂时删掉。</p><p>删完之后大概如下图：</p><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Pod::Spec</span>.new <span class="keyword">do</span> |<span class="params">s</span>|</span><br><span class="line">  s.name             = <span class="string">&#x27;DYTest&#x27;</span></span><br><span class="line">  s.version          = <span class="string">&#x27;0.1.0&#x27;</span></span><br><span class="line">  s.summary          = <span class="string">&#x27;A short description of DYTest.&#x27;</span></span><br><span class="line">  s.description      = <span class="string">&lt;&lt;-DESC</span></span><br><span class="line"><span class="string">TODO: Add long description of the pod here.</span></span><br><span class="line"><span class="string">                       DESC</span></span><br><span class="line"></span><br><span class="line">  s.homepage         = <span class="string">&#x27;https://github.com/lazyloading@163.com/DYTest&#x27;</span></span><br><span class="line">  s.license          = &#123; <span class="symbol">:type</span> =&gt; <span class="string">&#x27;MIT&#x27;</span>, <span class="symbol">:file</span> =&gt; <span class="string">&#x27;LICENSE&#x27;</span> &#125;</span><br><span class="line">  s.author           = &#123; <span class="string">&#x27;lazyloading@163.com&#x27;</span> =&gt; <span class="string">&#x27;lazyloading@163.com&#x27;</span> &#125;</span><br><span class="line">  s.source           = &#123; <span class="symbol">:git</span> =&gt; <span class="string">&#x27;https://github.com/lazyloading@163.com/DYTest.git&#x27;</span>, <span class="symbol">:tag</span> =&gt; s.version.to_s &#125;</span><br><span class="line">  s.ios.deployment_target = <span class="string">&#x27;8.0&#x27;</span></span><br><span class="line">  s.source_files = <span class="string">&#x27;DYTest/Classes/**/*&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># s.dependency &#x27;AFNetworking&#x27;, &#x27;~&gt; 2.3&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>其中</p><ul><li><p><a class="link"   href="http://s.name" >s.name<i class="fas fa-external-link-alt"></i></a> : 你所创建的库的名字，比如Masonry，AFNNetworking等等</p></li><li><p>s.version ： 库的版本号</p></li><li><p>s.summary ： 简短的描述信息</p></li><li><p>s.description ： 比简短描述长一点的描述信息</p></li><li><p>s.homepage ： pod库远程仓库主页地址 我们此次的示例工程的主页就是 <code>http://git.zhcs.com/iOS_Group/DYTest</code></p></li><li><p>s.license ： 遵守的协议</p></li><li><p>s.author ： 创建人</p></li><li><p>s.ios.deployment_target ： 支持的系统版本版本此次示例工程支持到<code>iOS 8.0</code></p></li><li><p>s.source ： 你的pod库的远程仓库路径，我们此次的示例工程的路径就是<code>http://192.168.120.30/iOS_Group/DYTest.git</code></p></li><li><p>s.source_files = 要加入库中的代码在工程中的路径，此次示例工程编写的代码就在之前强调的<code>'DYTest/Classes/**/*'</code>路径下</p></li></ul><h2 id="第二步">第二步</h2><p>当库每个版本代码编写完成后我们需要将pod库代码提交到对应的远程仓库，同时对应的spec文件也要推送到spec文件远程仓库。</p><p>第一步我们完成了spec文件的编写，第二步我们就要推送spec文件，此次示例工程我们的spec文件远程仓库就是我们前文所创建的<code>http://192.168.120.30/iOS_Group/DYTestSpecs.git</code></p><p>我们先对spec文件做一个本地校验看看是否有配置错误：</p><p>进入spec文件所在目录<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.34.53.png"                      alt="屏幕快照 2019-07-28 下午2.34.53"                ></p><p>执行命令</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod lib lint </span><br></pre></td></tr></table></figure><p>当你在spec文件所在目录并且只有一个spec文件时候你可以这么写，否则你需要指定你要校验的spec文件用如下写法</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod lib lint DYTest.podspec</span><br></pre></td></tr></table></figure><p>执行结果如下：</p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.39.19.png"                      alt="屏幕快照 2019-07-28 下午2.39.19"                ></p><p>第一次执行<code>pod lib lint </code>未成功，报出了⚠️其实这些警告可以忽略，我们只需要加上<code>--allow-warnings</code>参数，可以看到我们第二次执行成功了，如果你想看校验过程还可以在后边添加<code>--verbose</code>参数</p><p>但是只是做本地校验还不够，毕竟我们的库并不是自己玩玩，是需要让其他人也用的，这就需要推送的远端，远端推送之前就需要进行远端校验，不仅查看语法是否正确，也查看你在远端的代码版本和spec文件中的是否匹配。</p><p>我们先给代码打个<code>tag</code>,然后把tag推送到远程，tag版本需要和spec文件中的<code>s.version</code>一致，此处前边我们spec文件中<code>s.version</code>写的是<code>0.1.0</code></p><p><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.51.27.png"                      alt="屏幕快照 2019-07-28 下午2.51.27"                ><br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.51.40.png"                      alt="屏幕快照 2019-07-28 下午2.51.40"                ></p><p>至此tag已经打完并推送成功，接下来就是对spec文件进行远程校验<br>操作和本地校验类似只不过命令不同，执行命令</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint --allow-warnings</span><br></pre></td></tr></table></figure><p>结果如下<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%882.56.27.png"                      alt="屏幕快照 2019-07-28 下午2.56.27"                ></p><p>或者我们很自信spec文件绝对没问题，这时候也可以不校验直接推</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo push DYTestSpecs *.podspec --sources=http://192.168.120.30/iOS_Group/DYTestSpecs.git,https://github.com/CocoaPods/Specs.git --use-libraries --allow-warnings --verbose</span><br></pre></td></tr></table></figure><p>结果如下:<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%883.03.05.png"                      alt="屏幕快照 2019-07-28 下午3.03.05"                ></p><p>一次成功，完美，这里忍不住给自己鼓掌，整个操作行云流水一气呵成如德芙版丝滑中途没出现一点意外和错误，嘴角不自觉扬起了迷人的弧度<br><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/2334192-98329dbf4ae5a5bd.jpg"                      alt="2334192-98329dbf4ae5a5bd"                ></p><p>不过这句命令很长有必要给大家解释下每一部分的含义不然你只会<code>知其然不知其所以然</code>，看看看看，出口成章，小伙子学着点以后要多读书啊。<br>其中<code>DYTestSpecs</code>是我们第一篇里讲的，添加进本地repo目录下的示例工程对应的spec工程。</p><p><code>*.podspec</code>中*指通配符，这么写指以<code>.podspec</code>为后缀的文件,你也可以指定对应的spec文件，比如我们的示例工程就可以写成 <code>DYTest.podspec</code>。</p><p><code>--sources</code>指的是要将本地repo目录下<code>DYTestSpecs</code>工程推送的远端路径，如果你只想公司内部使用就可以不写后边的<code>https://github.com/CocoaPods/Specs.git</code></p><h2 id="第三步">第三步</h2><p>创建，编写，校验，推送都完成了，接下来就是使用了，我们先<code>search</code>试一下看能不能搜到我们的库</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod search DYTest</span><br></pre></td></tr></table></figure><p><img                       lazyload                     src="/images/loading.svg"                     data-src="media/15642856190114/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-28%20%E4%B8%8B%E5%8D%883.27.17.png"                      alt="屏幕快照 2019-07-28 下午3.27.17"                ></p><p>嗯，放心了，搜索的到，那么，接下来，就不用我多说了吧，开始愉快的使用吧~</p><p>**后记：**这两篇文章主要说的是私有pod库的创建，编写及推送流程，实际具体使用过程中可能还会遇到其他问题导致你用的头大，比如操作顺序出错导致配置了不可逆的错误环境，操作的天时不对，坐的位置风水不好等等，总之就是很多不可控，玄学问题，这个在这篇文章就不一一细说，后边有问题可以直接问，或者有时间转门写一下。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot; /&gt;
- [TOC]
-&lt;h1&gt;创建pod库流程(下)&lt;/h1&gt;
-&lt;p&gt;前边讲了pod库默认工程模板的创建，文件添加存放路径，代码编写位置等基本信息，今天简单说下spec文件的编写及推送。&lt;/p&gt;</summary>
-      
-    
-    
-    
-    <category term="开发" scheme="https://lazy.wiki/categories/%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="Cocoapods" scheme="https://lazy.wiki/tags/Cocoapods/"/>
     
   </entry>
   
