@@ -9,7 +9,7 @@
     
     <title>
         
-            iOS Crash日志符号化 |
+            标签: dSYM |
         
         Lazyloading
     </title>
@@ -91,7 +91,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/tags"
                             >
                                 标签
@@ -143,7 +143,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/tags">标签</a>
                 </li>
             
@@ -168,210 +168,42 @@
 
                 
                     <div class="fade-in-down-animation">
-    <div class="article-content-container">
-
-        <div class="article-title">
-            <span class="title-hover-animation">iOS Crash日志符号化</span>
+    <div class="tag-container">
+        <div class="tag-name"><i class="fas fa-tag"></i>&nbsp;dSYM
         </div>
-
-        
-            <div class="article-header">
-                <div class="avatar">
-                    <img src="/images/favicon.jpg">
-                </div>
-                <div class="info">
-                    <div class="author">
-                        <span class="name">Lazyloading</span>
-                        
-                            <span class="author-label">Lv3</span>
-                        
-                    </div>
-                    <div class="meta-info">
-                        <div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-07-06 20:30:20</span>
-        <span class="mobile">2022-07-06 20:30</span>
-    </span>
+        <div class="tag-post-list">
+            
+<div class="archive-list-container">
     
-        <span class="article-categories article-meta-item">
-            <i class="fas fa-folder"></i>&nbsp;
-            <ul>
+        <section class="archive-item">
+            <div class="archive-item-header">
+                <span class="archive-year">2022</span>
+                <span class="archive-year-post-count">[1]</span>
+            </div>
+            <ul class="article-list">
                 
-                    <li>
-                        <a href="/categories/%E5%BC%80%E5%8F%91/">开发</a>&nbsp;
+                    <li class="article-item">
+                        <a class="article-title"
+                           href="/posts/b98f7fe4/"
+                        >iOS Crash日志符号化</a>
+                        <span class="article-date">07-06</span>
                     </li>
                 
             </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fas fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/iOS/">iOS</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/Crash/">Crash</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/dSYM/">dSYM</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-
-    
-    
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>678 字</span>
-        </span>
-    
-    
-        <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
-        </span>
-    
+        </section>
     
 </div>
 
-                    </div>
-                </div>
-            </div>
-        
-
-        <div class="article-content markdown-body">
-            <h3 id="前言">前言</h3>
-<p>是这样的，最近面试遇到一个问题，问怎么排查分析crash，说实话做了几年开发，项目中对于crash日志的收集与分析都是用的三方服务，比如bugly，听云之类的，所以一开始听到这个问题不清楚具体在问什么，虽然之前有用过dSYMTools之类的工具分析，不过我印象中还要自己计算函数地址，所以用的很少，当时这个问题就没有回答好，事后研究了下，发现其实并不复杂，所以记录下，废话不多说直接开整</p>
-<h3 id="分析crash信息">分析crash信息</h3>
-<p>当我们程序crash时，堆栈看到的都是函数地址，想要定位具体哪里出了问题非常困难，可以通过调试crash日志获取详细信息<br>
-分析要准备几个必要文件</p>
-<ol>
-<li>dSYM文件（符号表文件，包含函数，函数地址，文件，行号的映射信息）</li>
-<li>crash文件或ips文件（包含造成crash的具体堆栈，进程信息等）</li>
-<li>symbolicatecrash或CrashSymbolicator文件</li>
-</ol>
-<ul>
-<li>dSYM获取</li>
-</ul>
-<p>需要先在xcode进行配置</p>
-<blockquote>
-<ol>
-<li><code>Build options -&gt; Debug Infomation Format -&gt; DWARF with dSYM File</code></li>
-<li><code>Generate Debug Symbols -&gt; YES</code>这一步有些人会关掉，因为关掉可以减小包体积，所以要注意</li>
-</ol>
-</blockquote>
-<p>之后具体获取</p>
-<blockquote>
-<ol>
-<li>Xcode-&gt;Window-&gt;Organizer -&gt; Archives -&gt; Finder -&gt; 显示包内容 -&gt; dSYMs</li>
-<li>项目目录下 -&gt; Products -&gt; xxx.app -&gt; Finder</li>
-</ol>
-</blockquote>
-<h4 id="Crash文件分析">Crash文件分析</h4>
-<ul>
-<li>crash日志获取</li>
-</ul>
-<blockquote>
-<p>如果手机在身边：xcode -&gt; window -&gt; Devieces and Simulators -&gt; View Device Logs -&gt; export 导出crash文件</p>
-</blockquote>
-<ul>
-<li>symbolicatecrash</li>
-</ul>
-<blockquote>
-<p>进入 <code>/Applications/Xcode.app/Contents/SharedFrameworks/DVTFoundation.framework/Versions/A/Resources/symbolicatecrash</code><br>
-如果路径不对，可在终端用<code>find /Applications/Xcode.app -name symbolicatecrash -type f</code>命令查找，获取路径后进入文件夹，copy文件出来</p>
-</blockquote>
-<p>三个文件都获取到后，放入同一个文件夹下，终端进入文件夹，执行如下命令</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./symbolicatecrash xxx.crash xxx.dSYM &gt; xxx.log</span><br></pre></td></tr></table></figure>
-<p>如果遇到报错<code>Error: DEVELOPER_DIR&quot; is not defined at ./symbolicatecrash line 69</code>，就先在终端输入</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer</span><br></pre></td></tr></table></figure>
-<p>之后查看log文件<code>Last Exception</code>部分</p>
-<h4 id="ips文件">ips文件</h4>
-<ul>
-<li>ips获取</li>
-</ul>
-<blockquote>
-<p>设置-&gt;隐私-&gt;分析-&gt;分析数据 -&gt; 导出ips文件(将synced后缀改为ips后缀)</p>
-</blockquote>
-<ul>
-<li>CrashSymbolicator</li>
-</ul>
-<blockquote>
-<p>进入<code>/Applications/Xcode.app/Contents/SharedFrameworks/CoreSymbolicationDT.framework/Versions/A/Resources/CrashSymbolicator.py</code></p>
-</blockquote>
-<p>因为CrashSymbolicator.py有其他模块的路径依赖，所以我们不复制文件，直接通过路径执行</p>
-<p>将拿到的dSYM文件和ips文件后放入同一个文件夹下，然后目录下终端执行</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 /Applications/Xcode.app/Contents/SharedFrameworks/CoreSymbolicationDT.framework/Versions/A/Resources/CrashSymbolicator.py -d xxx.dSYM -p xxx.ips -&gt; xxx.json</span><br></pre></td></tr></table></figure>
-<p>之后查看json文件<code>Last Exception</code>，CrashSymbolicator输出的是json格式的数据</p>
-
         </div>
+    </div>
 
-        
-            <div class="post-copyright-info">
-                <div class="article-copyright-info-container">
-    <ul>
-        <li>本文标题：iOS Crash日志符号化</li>
-        <li>本文作者：Lazyloading</li>
-        <li>创建时间：2022-07-06 20:30:20</li>
-        <li>
-            本文链接：https://lazy.wiki/posts/b98f7fe4/
-        </li>
-        <li>
-            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
-        </li>
-    </ul>
+    <div class="tag-paginator">
+        <div class="paginator">
+    
+
+    
 </div>
 
-            </div>
-        
-
-        
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/iOS/">#iOS</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/Crash/">#Crash</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item">
-                        <a href="/tags/dSYM/">#dSYM</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
-
-        
-            <div class="article-nav">
-                
-                
-                    <div class="article-next">
-                        <a class="next"
-                           rel="next"
-                           href="/posts/12c49338/"
-                        >
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">年华虚度</span>
-                                <span class="post-nav-item">下一篇</span>
-                            </span>
-                            <span class="right arrow-icon flex-center">
-                              <i class="fas fa-chevron-right"></i>
-                            </span>
-                        </a>
-                    </div>
-                
-            </div>
-        
-
-        
     </div>
 </div>
 
@@ -414,23 +246,6 @@
         </div>
     </div>
 
-    
-        <div class="post-tools">
-            <div class="post-tools-container">
-    <ul class="tools-list">
-        <!-- TOC aside toggle -->
-        
-            <li class="tools-item page-aside-toggle">
-                <i class="fas fa-outdent"></i>
-            </li>
-        
-
-        <!-- go comment -->
-        
-    </ul>
-</div>
-
-        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -477,14 +292,6 @@
 
     </div>
 
-    
-        <aside class="page-aside">
-            <div class="post-toc-wrap">
-    <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90crash%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">分析crash信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Crash%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">Crash文件分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ips%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">ips文件</span></a></li></ol></li></ol>
-    </div>
-</div>
-        </aside>
     
 
     <div class="image-viewer-container">
@@ -542,8 +349,6 @@
 
 
 <div class="post-scripts pjax">
-    
-        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
     
 </div>
 

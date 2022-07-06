@@ -379,6 +379,20 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://lazy.wiki/tags/Crash/</loc>
+    <lastmod>2022-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lazy.wiki/tags/dSYM/</loc>
+    <lastmod>2022-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
