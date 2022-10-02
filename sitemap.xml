@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lazy.wiki/posts/f6e707/</loc>
+    
+    <lastmod>2022-10-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lazy.wiki/posts/b98f7fe4/</loc>
     
     <lastmod>2022-07-06</lastmod>
@@ -247,7 +256,7 @@
 
   <url>
     <loc>https://lazy.wiki/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -255,140 +264,147 @@
   
   <url>
     <loc>https://lazy.wiki/tags/%E7%94%B5%E5%BD%B1%E5%8F%B0%E8%AF%8D/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/OCLint/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/Cocoapods/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/Flutter/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/iOS/</loc>
-    <lastmod>2022-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lazy.wiki/tags/Mysql/</loc>
-    <lastmod>2022-07-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lazy.wiki/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E6%B1%87%E7%BC%96/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E9%87%8D%E5%AD%A6%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lazy.wiki/tags/Mysql/</loc>
+    <lastmod>2022-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lazy.wiki/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/GCD/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E7%96%AB%E6%83%85/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/Vue/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E6%8C%87%E4%BB%A4/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/%E6%97%B6%E5%85%89%E5%8C%86%E5%8C%86/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/Crash/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/tags/dSYM/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lazy.wiki/tags/Fastlane/</loc>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -397,14 +413,14 @@
   
   <url>
     <loc>https://lazy.wiki/categories/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://lazy.wiki/categories/%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
